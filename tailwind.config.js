@@ -1,8 +1,12 @@
+// const { Colors } = require("chart.js");
+
 module.exports = {
   purge: [],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      backgroundColor: '#2596be',
+    },
   },
   variants: {
     extend: {},
