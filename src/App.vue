@@ -48,7 +48,7 @@
 
         <router-link to="/features" class="text-sm font-semibold leading-6 text-gray-900">Features</router-link>
         <router-link to="/charts" class="text-sm font-semibold leading-6 text-gray-900">Charts</router-link>
-        <router-link to="/energy-area" class="text-sm font-semibold leading-6 text-gray-900">Energy Area</router-link>
+        <router-link to="/charts" class="text-sm font-semibold leading-6 text-gray-900">Energy Area</router-link>
       </PopoverGroup>
       <div class="hidden lg:flex lg:flex-1 lg:justify-end">
         <router-link to="/login" class="text-sm font-semibold leading-6 text-gray-900">Log in <span aria-hidden="true">&rarr;</span></router-link>

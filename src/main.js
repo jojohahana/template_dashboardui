@@ -6,7 +6,7 @@ import axios from 'axios'
 
 
 // Get the CSRF token from the meta tag
-const token = document.querySelector('meta[name="csrf-token"]')?.content;
+const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
 
 if (token) {
     axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
@@ -15,10 +15,10 @@ if (token) {
 }
 
 // Set the CSRF token as a default header for Axios
-axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
+// axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
 
 // Optionally, set the base URL for your API requests
-axios.defaults.baseURL = process.env.MIX_APP_URL || 'http://localhost:8000'
+// axios.defaults.baseURL = process.env.MIX_APP_URL || 'http://localhost:8000'
 
 //Create Vue App
 const app = createApp(App);
