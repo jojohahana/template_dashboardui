@@ -29,7 +29,17 @@
           },
           options: {
             responsive: true,
-            maintainAspectRatio: false
+            maintainAspectRatio: false,
+            plugins: {
+              title: {
+                display: true,
+                text: 'Monthly Data LineChart'
+              },
+              legend: {
+                display: true,
+                position: 'bottom'
+              }
+            }
           }
         });
       });

@@ -29,7 +29,17 @@
           },
           options: {
             responsive: true,
-            maintainAspectRatio: false
+            maintainAspectRatio: false,
+            plugins: {
+              title: { //Judul Card
+                display: true,
+                text: 'Monthly Data BarChart'
+              },
+              legend: {
+                display: true,
+                position: 'bottom'
+              }
+            }
           }
         });
       });
