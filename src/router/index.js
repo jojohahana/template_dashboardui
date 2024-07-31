@@ -3,6 +3,7 @@ import HomePage from '../views/HomePage.vue'
 // import AboutPage from '../views/About.vue'
 import FeaturesPage from '../views/Features.vue'
 import ChartsPage from '../views/ChartsPage.vue'
+import LoginPage from '@/views/LoginPage.vue'
 
 const routes = [
   {
@@ -21,6 +22,11 @@ const routes = [
     path: '/charts',
     name: 'Charts',
     component: ChartsPage
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: LoginPage
   },
 
  

@@ -4,7 +4,7 @@
       <div class="flex lg:flex-1">
         <router-link to="/" class="-m-1.5 p-1.5">
           <span class="sr-only">Your Company</span>
-          <img class="h-8 w-auto" src="../public/ojilogo-removebg-preview.png" alt="" />
+          <img class="h-12 w-auto" src="../public/ojilogo-removebg-preview.png" alt="" />
         </router-link>
       </div>
       <div class="flex lg:hidden">
