@@ -1,9 +1,7 @@
 <template>
     <div class="flex items-center bg-white border rounded-sm overflow-hidden shadow">
       <div :class="iconBgClass" class="p-4">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path :d="iconPath" />
-        </svg>
+        <i class="material-icons text-white text-4xl">{{ iconName }}</i>
       </div>
       <div class="px-4 text-gray-700">
         <h3 class="text-sm tracking-wider">{{ title }}</h3>
@@ -16,7 +14,7 @@
   export default {
     name: 'StatCard',
     props: {
-      iconPath: {
+      iconName: {
         type: String,
         required: true
       },
