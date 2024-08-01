@@ -6,7 +6,7 @@
         iconName="solar_power"
         title="Total Solar Energy"
         value="12,768 kWh"
-        iconBgClass="bg-blue-400"
+        iconBgClass="bg-indigo-400"
       />
       <StatCard
         iconName="energy_savings_leaf"
@@ -18,7 +18,7 @@
         iconName="water_drop"
         title="Total Water Savings"
         value="142,334 m3"
-        iconBgClass="bg-indigo-400"
+        iconBgClass="bg-blue-400"
       />
       <StatCard
         iconName="gas_meter"

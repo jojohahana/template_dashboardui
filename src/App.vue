@@ -16,10 +16,12 @@
         </div>
         <PopoverGroup class="hidden lg:flex lg:gap-x-12">
           <Popover class="relative">
-            <PopoverButton class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
+            <!-- Start Multiple Navbar Child Menu Desktop View -->
+            <!-- <PopoverButton class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
               Product
               <ChevronDownIcon class="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
-            </PopoverButton>
+            </PopoverButton> -->
+            <!-- End Multiple Navbar Child Menu Desktop View -->
 
             <transition enter-active-class="transition ease-out duration-200" enter-from-class="opacity-0 translate-y-1" enter-to-class="opacity-100 translate-y-0" leave-active-class="transition ease-in duration-150" leave-from-class="opacity-100 translate-y-0" leave-to-class="opacity-0 translate-y-1">
               <PopoverPanel class="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
@@ -71,7 +73,8 @@
           <div class="mt-6 flow-root">
             <div class="-my-6 divide-y divide-gray-500/10">
               <div class="space-y-2 py-6">
-                <Disclosure as="div" class="-mx-3" v-slot="{ open }">
+                <!-- Start Sub Navbar Mobile View  -->
+                <!-- <Disclosure as="div" class="-mx-3" v-slot="{ open }">
                   <DisclosureButton class="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
                     Product
                     <ChevronDownIcon :class="[open ? 'rotate-180' : '', 'h-5 w-5 flex-none']" aria-hidden="true" />
@@ -79,7 +82,8 @@
                   <DisclosurePanel class="mt-2 space-y-2">
                     <DisclosureButton v-for="item in [...products, ...callsToAction]" :key="item.name" as="router-link" :to="item.href" class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50">{{ item.name }}</DisclosureButton>
                   </DisclosurePanel>
-                </Disclosure>
+                </Disclosure> -->
+                <!-- End Sub Navbar Mobile View  -->
                 <router-link to="/features" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Features</router-link>
                 <router-link to="/marketplace" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Marketplace</router-link>
                 <router-link to="/company" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Company</router-link>
@@ -102,11 +106,13 @@ import { useRoute } from 'vue-router'
 import {
   Dialog,
   DialogPanel,
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
+  // !! Disclosure for Colapse Navbar Mobile View !!
+  // Disclosure,
+  // DisclosureButton,
+  // DisclosurePanel,
   Popover,
-  PopoverButton,
+  // !! PopoverButton for Colapse Navbar Desktop View !! 
+  // PopoverButton,
   PopoverGroup,
   PopoverPanel,
 } from '@headlessui/vue'
@@ -119,7 +125,8 @@ import {
   SquaresPlusIcon,
   XMarkIcon,
 } from '@heroicons/vue/24/outline'
-import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/vue/20/solid'
+// Kalo aktifin Navbar Multiple Menu mdiDesktopClassic, jangan lupa import 'ChevronDownIcon,' di bawah ini 
+import {  PhoneIcon, PlayCircleIcon } from '@heroicons/vue/20/solid'
 
 const products = [
   { name: 'Analytics', description: 'Get a better understanding of your traffic', href: '/analytics', icon: ChartPieIcon },
