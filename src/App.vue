@@ -15,14 +15,16 @@
           </button>
         </div>
         <PopoverGroup class="hidden lg:flex lg:gap-x-12">
+          <router-link to="/" class="text-sm font-semibold leading-6 text-gray-900 nav-link">Home</router-link>
+          <router-link to="/charts" class="text-sm font-semibold leading-6 text-gray-900 nav-link">Energy Area</router-link>
+          <router-link to="/features" class="text-sm font-semibold leading-6 text-gray-900 nav-link">Features</router-link>
+          <router-link to="/charts" class="text-sm font-semibold leading-6 text-gray-900 nav-link">Charts</router-link>
+          <!-- Start Multiple Navbar Child Menu Desktop View -->
           <Popover class="relative">
-            <!-- Start Multiple Navbar Child Menu Desktop View -->
-            <!-- <PopoverButton class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
+            <PopoverButton class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
               Product
-              <ChevronDownIcon class="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
-            </PopoverButton> -->
-            <!-- End Multiple Navbar Child Menu Desktop View -->
-
+              <ChevronDownIcon class="h-5 w-5 flex-none text-gray-900" aria-hidden="true" />
+            </PopoverButton>
             <transition enter-active-class="transition ease-out duration-200" enter-from-class="opacity-0 translate-y-1" enter-to-class="opacity-100 translate-y-0" leave-active-class="transition ease-in duration-150" leave-from-class="opacity-100 translate-y-0" leave-to-class="opacity-0 translate-y-1">
               <PopoverPanel class="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
                 <div class="p-4">
@@ -48,11 +50,9 @@
               </PopoverPanel>
             </transition>
           </Popover>
-
-          <router-link to="/features" class="text-sm font-semibold leading-6 text-gray-900">Features</router-link>
-          <router-link to="/charts" class="text-sm font-semibold leading-6 text-gray-900">Charts</router-link>
-          <router-link to="/charts" class="text-sm font-semibold leading-6 text-gray-900">Energy Area</router-link>
+          <!-- End Multiple Navbar Child Menu Desktop View -->
         </PopoverGroup>
+
         <div class="hidden lg:flex lg:flex-1 lg:justify-end">
           <router-link to="/login" class="text-sm font-semibold leading-6 text-gray-900">Log Out <span aria-hidden="true">&rarr;</span></router-link>
         </div>
@@ -74,7 +74,7 @@
             <div class="-my-6 divide-y divide-gray-500/10">
               <div class="space-y-2 py-6">
                 <!-- Start Sub Navbar Mobile View  -->
-                <!-- <Disclosure as="div" class="-mx-3" v-slot="{ open }">
+                <Disclosure as="div" class="-mx-3" v-slot="{ open }">
                   <DisclosureButton class="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
                     Product
                     <ChevronDownIcon :class="[open ? 'rotate-180' : '', 'h-5 w-5 flex-none']" aria-hidden="true" />
@@ -82,11 +82,12 @@
                   <DisclosurePanel class="mt-2 space-y-2">
                     <DisclosureButton v-for="item in [...products, ...callsToAction]" :key="item.name" as="router-link" :to="item.href" class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50">{{ item.name }}</DisclosureButton>
                   </DisclosurePanel>
-                </Disclosure> -->
+                </Disclosure>
                 <!-- End Sub Navbar Mobile View  -->
+                <router-link to="/" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Home</router-link>
+                <router-link to="/features" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Energy Area</router-link>
                 <router-link to="/features" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Features</router-link>
-                <router-link to="/marketplace" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Marketplace</router-link>
-                <router-link to="/company" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Company</router-link>
+                <router-link to="/company" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Charts</router-link>
               </div>
               <div class="py-6">
                 <router-link to="/login" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Log Out</router-link>
@@ -107,12 +108,12 @@ import {
   Dialog,
   DialogPanel,
   // !! Disclosure for Colapse Navbar Mobile View !!
-  // Disclosure,
-  // DisclosureButton,
-  // DisclosurePanel,
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
   Popover,
   // !! PopoverButton for Colapse Navbar Desktop View !! 
-  // PopoverButton,
+  PopoverButton,
   PopoverGroup,
   PopoverPanel,
 } from '@headlessui/vue'
@@ -126,7 +127,7 @@ import {
   XMarkIcon,
 } from '@heroicons/vue/24/outline'
 // Kalo aktifin Navbar Multiple Menu mdiDesktopClassic, jangan lupa import 'ChevronDownIcon,' di bawah ini 
-import {  PhoneIcon, PlayCircleIcon } from '@heroicons/vue/20/solid'
+import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/vue/20/solid'
 
 const products = [
   { name: 'Analytics', description: 'Get a better understanding of your traffic', href: '/analytics', icon: ChartPieIcon },
@@ -147,3 +148,13 @@ const showNavbar = computed(() => {
   return route.path !== '/login'
 })
 </script>
+
+<style scoped>
+  .nav-link {
+    @apply text-sm font-semibold leading-6 text-gray-900 rounded-xl transition duration-300 ease-in-out;
+  }
+
+  .nav-link:hover {
+    @apply text-white font-bold;
+  }
+</style>
