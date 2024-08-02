@@ -16,12 +16,12 @@
         </div>
         <PopoverGroup class="hidden lg:flex lg:gap-x-12">
           <router-link to="/" class="text-sm font-semibold leading-6 text-gray-900 nav-link">Home</router-link>
-          <router-link to="/charts" class="text-sm font-semibold leading-6 text-gray-900 nav-link">Energy Area</router-link>
+          <router-link to="/features" class="text-sm font-semibold leading-6 text-gray-900 nav-link">Energy Area</router-link>
           <router-link to="/features" class="text-sm font-semibold leading-6 text-gray-900 nav-link">Features</router-link>
           <router-link to="/charts" class="text-sm font-semibold leading-6 text-gray-900 nav-link">Charts</router-link>
           <!-- Start Multiple Navbar Child Menu Desktop View -->
           <Popover class="relative">
-            <PopoverButton class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
+            <PopoverButton class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900 hover:text-white">
               Product
               <ChevronDownIcon class="h-5 w-5 flex-none text-gray-900" aria-hidden="true" />
             </PopoverButton>
@@ -54,7 +54,7 @@
         </PopoverGroup>
 
         <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-          <router-link to="/login" class="text-sm font-semibold leading-6 text-gray-900">Log Out <span aria-hidden="true">&rarr;</span></router-link>
+          <router-link to="/login" class="text-sm font-semibold leading-6 text-gray-900 nav-link">Log Out <span aria-hidden="true">&rarr;</span></router-link>
         </div>
       </nav>
       <Dialog class="lg:hidden" @close="mobileMenuOpen = false" :open="mobileMenuOpen">
@@ -130,9 +130,9 @@ import {
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/vue/20/solid'
 
 const products = [
-  { name: 'Analytics', description: 'Get a better understanding of your traffic', href: '/analytics', icon: ChartPieIcon },
-  { name: 'Engagement', description: 'Speak directly to your customers', href: '/engagement', icon: CursorArrowRaysIcon },
-  { name: 'Security', description: 'Your customers’ data will be safe and secure', href: '/security', icon: FingerPrintIcon },
+  { name: 'Syringe', description: 'Get a better understanding of your traffic', href: '/analytics', icon: ChartPieIcon },
+  { name: 'Blood Bag', description: 'Speak directly to your customers', href: '/engagement', icon: CursorArrowRaysIcon },
+  { name: 'Urine Bag', description: 'Your customers’ data will be safe and secure', href: '/security', icon: FingerPrintIcon },
   { name: 'Integrations', description: 'Connect with third-party tools', href: '/integrations', icon: SquaresPlusIcon },
   { name: 'Automations', description: 'Build strategic funnels that will convert', href: '/automations', icon: ArrowPathIcon },
 ]

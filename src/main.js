@@ -3,6 +3,8 @@ import App from './App.vue'
 import router from './router'
 import './index.css' //TailwindCSS Declare
 import axios from 'axios'
+import '@mdi/font/css/materialdesignicons.css';
+
 
 
 // Get the CSRF token from the meta tag
