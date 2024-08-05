@@ -16,8 +16,8 @@
         </div>
         <PopoverGroup class="hidden lg:flex lg:gap-x-12">
           <router-link to="/" class="text-sm font-semibold leading-6 text-gray-900 nav-link">Home</router-link>
-          <router-link to="/features" class="text-sm font-semibold leading-6 text-gray-900 nav-link">Energy Area</router-link>
-          <router-link to="/features" class="text-sm font-semibold leading-6 text-gray-900 nav-link">Features</router-link>
+          <router-link to="/widget" class="text-sm font-semibold leading-6 text-gray-900 nav-link">Energy Area</router-link>
+          <router-link to="/widget" class="text-sm font-semibold leading-6 text-gray-900 nav-link">Widget</router-link>
           <router-link to="/charts" class="text-sm font-semibold leading-6 text-gray-900 nav-link">Charts</router-link>
           <!-- Start Multiple Navbar Child Menu Desktop View -->
           <Popover class="relative">
@@ -85,8 +85,8 @@
                 </Disclosure>
                 <!-- End Sub Navbar Mobile View  -->
                 <router-link to="/" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Home</router-link>
-                <router-link to="/features" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Energy Area</router-link>
-                <router-link to="/features" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Features</router-link>
+                <router-link to="/widget" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Energy Area</router-link>
+                <router-link to="/widget" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Widget</router-link>
                 <router-link to="/company" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Charts</router-link>
               </div>
               <div class="py-6">
