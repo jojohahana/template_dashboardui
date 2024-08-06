@@ -118,12 +118,12 @@ import {
   PopoverPanel,
 } from '@headlessui/vue'
 import {
-  ArrowPathIcon,
+  // ArrowPathIcon,
   Bars3Icon,
   ChartPieIcon,
   CursorArrowRaysIcon,
   FingerPrintIcon,
-  SquaresPlusIcon,
+  // SquaresPlusIcon,
   XMarkIcon,
 } from '@heroicons/vue/24/outline'
 // Kalo aktifin Navbar Multiple Menu mdiDesktopClassic, jangan lupa import 'ChevronDownIcon,' di bawah ini 
@@ -133,8 +133,8 @@ const products = [
   { name: 'Syringe', description: 'Get a better understanding of your traffic', href: '/analytics', icon: ChartPieIcon },
   { name: 'Blood Bag', description: 'Speak directly to your customers', href: '/engagement', icon: CursorArrowRaysIcon },
   { name: 'Urine Bag', description: 'Your customers’ data will be safe and secure', href: '/security', icon: FingerPrintIcon },
-  { name: 'Integrations', description: 'Connect with third-party tools', href: '/integrations', icon: SquaresPlusIcon },
-  { name: 'Automations', description: 'Build strategic funnels that will convert', href: '/automations', icon: ArrowPathIcon },
+  // { name: 'Integrations', description: 'Connect with third-party tools', href: '/integrations', icon: SquaresPlusIcon },
+  // { name: 'Automations', description: 'Build strategic funnels that will convert', href: '/automations', icon: ArrowPathIcon },
 ]
 const callsToAction = [
   { name: 'Watch demo', href: '/watch-demo', icon: PlayCircleIcon },

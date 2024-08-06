@@ -67,10 +67,12 @@
     methods: {
       async login() {
         try {
+          console.log('Login attempt with', { email: this.email, password: this.password });
           const response = await axios.post('http://127.0.0.1:8000/login', { //post to route laravel 
             email: this.email,
             password: this.password,
           });
+          console.log('Login responese', response);
           if (response.status === 200) {
             this.$router.push('/home');
           }

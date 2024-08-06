@@ -2,7 +2,7 @@
     <div class="flex">
       <!-- Sidebar -->
       <div class="flex flex-col w-64 h-screen px-4 py-8 bg-white border-r">
-        <h2 class="text-3xl font-semibold text-center text-blue-800">Brand</h2>
+        <h2 class="text-3xl font-semibold text-center text-blue-800">Admin</h2>
   
         <div class="flex flex-col justify-between mt-6">
           <aside>
