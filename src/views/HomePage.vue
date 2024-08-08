@@ -30,7 +30,7 @@
     <!-- End Various Cards  -->
 
     <!-- Start Various Charts  -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8 px-4">
       <div class="card">
         <LineChart />
       </div>
@@ -42,6 +42,15 @@
       </div>
     </div>
     <!-- End Various Charts  -->
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 px-4">
+      <div class="card">
+        <LineChart />
+      </div>
+      <div class="card">
+        <BarChart />
+      </div>
+    </div>
 
 
   </div>
