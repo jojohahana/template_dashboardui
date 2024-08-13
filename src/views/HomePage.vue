@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- Start Various Cards  -->
+    <!-- Start Summary Cards  -->
     <div class="grid grid-cols-1 gap-4 px-4 mt-8 sm:grid-cols-4 sm:px-8 mb-8">
       <StatCard
         iconName="solar_power"
@@ -43,14 +43,16 @@
     </div>
     <!-- End Various Charts  -->
 
+    <!-- Start Charts 2 Column  -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 px-4">
-      <div class="card">
-        <LineChart />
-      </div>
       <div class="card">
         <BarChart />
       </div>
+      <div class="card">
+        <LineChart />
+      </div>
     </div>
+    <!-- End Charts 2 Column  -->
 
 
   </div>
@@ -61,6 +63,7 @@ import LineChart from './charts/LineChart.vue';
 import BarChart from './charts/BarChart.vue';
 import PieChart from './charts/PieChart.vue';
 import StatCard from '../components/StatCard.vue';
+// import HeatmapChart from './charts/HeatmapChart.vue';
 
 export default {
   components: {
@@ -68,6 +71,7 @@ export default {
     BarChart,
     PieChart,
     StatCard
+    // HeatmapChart
   },
   name: 'HomePage'
 }
