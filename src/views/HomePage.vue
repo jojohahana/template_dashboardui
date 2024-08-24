@@ -5,7 +5,7 @@
       <StatCard
         iconName="solar_power"
         title="Total Solar Energy"
-        value="12,768 kWh"
+        :value="totalSolarEnergy || 'Loading..'"
         iconBgClass="bg-indigo-400"
       />
       <StatCard
@@ -53,8 +53,6 @@
       </div>
     </div>
     <!-- End Charts 2 Column  -->
-
-
   </div>
 </template>
 
@@ -63,18 +61,99 @@ import LineChart from './charts/LineChart.vue';
 import BarChart from './charts/BarChart.vue';
 import PieChart from './charts/PieChart.vue';
 import StatCard from '../components/StatCard.vue';
-// import HeatmapChart from './charts/HeatmapChart.vue';
+import axios from 'axios';
 
 export default {
   components: {
     LineChart,
     BarChart,
     PieChart,
-    StatCard
-    // HeatmapChart
+    StatCard,
   },
-  name: 'HomePage'
-}
+  data() {
+    return {
+      totalSolarEnergy: 'Loading...',
+    };
+  },
+  mounted() {
+    this.fetchSummaryData();
+  },
+  // methods: {
+  //   async fetchSummaryData() {
+  //     try {
+  //       const response = await axios.get('http://localhost:8000/api/summary', {
+  //         params: {
+  //           year: 2024,
+  //           month: 5,
+  //         },
+  //       });
+        
+  //       console.log('API Response:', response.data);
+
+  //       if (response.data && response.data.total_energy) {
+  //         this.totalSolarEnergy = response.data.total_energy + ' kWh';
+  //       } else {
+  //         this.totalSolarEnergy = 'Error: No data';
+  //       }
+
+  //       console.log('Total Solar Energy:', this.totalSolarEnergy);
+        
+  //     } catch (error) {
+  //       console.error('Error Fetching Summary Data:', error);
+  //       this.totalSolarEnergy = 'Error';
+  //     }
+  //   },
+  // },
+
+  methods: {
+  async fetchSummaryData() {
+    try {
+      const response = await axios.get('http://localhost:8000/api/summary', {
+        params: {
+          year: 2024,
+          month: 5,
+        },
+      });
+
+      // Extract response data
+      let responseData = response.data;
+
+      // Check if response is a string and contains HTML comments
+      if (typeof responseData === 'string') {
+        // Remove HTML comments if present
+        responseData = responseData.replace(/<!--|-->/g, '').trim();
+
+        // Attempt to parse the cleaned JSON string
+        try {
+          responseData = JSON.parse(responseData);
+        } catch (e) {
+          console.error('Error parsing response data as JSON:', e);
+          this.totalSolarEnergy = 'Error: Invalid JSON';
+          return;
+        }
+      }
+
+      // Log the cleaned response data
+      console.log('Cleaned API Response:', responseData);
+
+      // Now check for total_energy
+      if (responseData && responseData.total_energy) {
+        this.totalSolarEnergy = responseData.total_energy + ' kWh';
+      } else {
+        this.totalSolarEnergy = 'Error: No data';
+      }
+
+      console.log('Total Solar Energy:', this.totalSolarEnergy);
+
+    } catch (error) {
+      console.error('Error Fetching Summary Data:', error);
+      this.totalSolarEnergy = 'Error';
+    }
+  },
+},
+
+
+};
 </script>
 
 <style scoped>
