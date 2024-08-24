@@ -138,7 +138,10 @@ export default {
 
       // Now check for total_energy
       if (responseData && responseData.total_energy) {
-        this.totalSolarEnergy = responseData.total_energy + ' kWh';
+        //Parse the value as a float, round it and format it with thousands separators
+        const totalEnergy= Math.round(parseFloat(responseData.total_energy));
+        this.totalSolarEnergy = totalEnergy.toLocaleString('de-DE') + ' kWh';
+        // this.totalSolarEnergy = responseData.total_energy + ' kWh';
       } else {
         this.totalSolarEnergy = 'Error: No data';
       }
