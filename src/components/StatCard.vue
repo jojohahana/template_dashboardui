@@ -5,7 +5,7 @@
       </div>
       <div class="px-4 text-gray-700">
         <h3 class="text-sm tracking-wider">{{ title }}</h3>
-        <p class="text-3xl">{{ value }}</p>
+        <p class="text-2xl">{{ value }}</p>
       </div>
     </div>
   </template>
