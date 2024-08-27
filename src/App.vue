@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header v-if="showNavbar" :style="{ backgroundColor: '#7fc1d4' }" > <!--class="fixed top-0 left-0 w-full z-50 shadow"-->
+    <header v-if="showNavbar" :style="{ backgroundColor: '#7fc1d4' }" class="sticky top-0 z-50"> <!--class="fixed top-0 left-0 w-full z-50 shadow"-->
       <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
         <div class="flex lg:flex-1">
           <router-link to="/" class="-m-1.5 p-1.5">
