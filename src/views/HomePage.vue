@@ -4,7 +4,7 @@
     <div class="grid grid-cols-1 gap-4 px-4 mt-8 sm:grid-cols-4 sm:px-8 mb-8">
       <StatCard
         iconName="solar_power"
-        title="Total Solar Energy"
+        title="Total Energy Usage"
         :value="totalSolarEnergy || 'Loading..'"
         iconBgClass="bg-indigo-400"
       />
@@ -46,10 +46,10 @@
     <!-- Start Charts 2 Column  -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 px-4">
       <div class="card">
-        <BarChart />
+        <DoughnutChart />
       </div>
       <div class="card">
-        <LineChart />
+        <RadarChart />
       </div>
     </div>
     <!-- End Charts 2 Column  -->
@@ -61,6 +61,8 @@ import LineChart from './charts/LineChart.vue';
 import BarChart from './charts/BarChart.vue';
 import PieChart from './charts/PieChart.vue';
 import StatCard from '../components/StatCard.vue';
+import DoughnutChart from './charts/DoughnutChart.vue';
+import RadarChart from './charts/RadarChart.vue';
 import axios from 'axios';
 
 export default {
@@ -69,6 +71,8 @@ export default {
     BarChart,
     PieChart,
     StatCard,
+    DoughnutChart,
+    RadarChart,
   },
   data() {
     return {

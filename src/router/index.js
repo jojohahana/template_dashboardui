@@ -4,13 +4,15 @@ import WidgetPage from '../views/WidgetPage.vue'
 import ChartsPage from '../views/ChartsPage.vue'
 import LoginPage from '@/views/LoginPage.vue'
 import AdminPage from '@/views/AdminPage.vue'
+// import { Title } from 'chart.js'
 // import axios from 'axios'
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: HomePage
+    component: HomePage,
+    meta: { Title: 'Home Page'}
   },
 
   {
