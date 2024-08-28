@@ -34,13 +34,31 @@ export default {
         }
 
         // Process the cleaned JSON data
-        chartData.value = responseData.map(item => ({
-          date: new Date(item.tanggal).toLocaleDateString('en-GB', { //Change format date on legend charts
+        // chartData.value = responseData.map(item => ({
+        //   date: new Date(item.tanggal).toLocaleDateString('en-GB', { 
+        //     //Format as 'DD-Mon'
+        //     day: '2-digit',
+        //     month: 'short',
+        //   }), 
+        //   ttl_energy: parseFloat(item.ttl_energy),
+        // }));
+        const processedData = responseData.map(item => ({
+          date: new Date(item.tanggal).toLocaleDateString('en-GB', {
+            // Format as 'DD-Mon' (e.g., '22-Mar')
             day: '2-digit',
             month: 'short',
           }), 
-          ttl_energy: parseFloat(item.ttl_energy),
+          ttl_energy: Math.ceil(parseFloat(item.ttl_energy)), //roundup ttl_energy value
         }));
+
+        // Calculate the gap between consecutive days
+        chartData.value = processedData.map((item, index, array) => {
+          if (index === 0) return null; // No gap for the first day
+          return {
+            date: item.date,
+            gap: item.ttl_energy - array[index - 1].ttl_energy
+          };
+        }).filter(item => item !== null); // Remove the null entry for the first day
 
         renderChart();
       } catch (error) {
@@ -50,7 +68,7 @@ export default {
 
     const renderChart = () => {
       const labels = chartData.value.map(item => item.date);
-      const data = chartData.value.map(item => item.ttl_energy);
+      const data = chartData.value.map(item => item.gap);
 
       new Chart(lineChart.value, {
         type: 'line',
