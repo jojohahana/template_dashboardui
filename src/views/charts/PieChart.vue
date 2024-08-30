@@ -36,7 +36,7 @@ export default {
         // Process the cleaned JSON data
         chartData.value = responseData.map(item => ({
           shift: item.shift,
-          total_energy: parseFloat(item.total_energy),
+          total_energy: Math.ceil(parseFloat(item.total_energy)), //round up value
         }));
 
         renderChart();
