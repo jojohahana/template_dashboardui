@@ -5,15 +5,16 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
-import { Chart, BarController, BarElement, CategoryScale, LinearScale, Title } from 'chart.js';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { Chart, BarController, BarElement, CategoryScale, LinearScale, Title, Legend } from 'chart.js';
 import axios from 'axios';
 
-Chart.register(BarController, BarElement, CategoryScale, LinearScale, Title);
+Chart.register(BarController, BarElement, CategoryScale, LinearScale, Title, Legend);
 
 export default {
   setup() {
     const barChart = ref(null);
+    let chartInstance = null;
     const chartData = ref([]);
 
     const fetchMonthlySummary = async () => {
@@ -25,9 +26,7 @@ export default {
           },
         });
 
-        // Clean the response data by removing HTML comments if present
         let responseData = response.data;
-
         if (typeof responseData === 'string') {
           responseData = responseData.replace(/<!--|-->/g, '').trim();
           try {
@@ -43,8 +42,8 @@ export default {
           month: new Date(item.month_year).toLocaleDateString('en-GB', {
             month: 'short',
             year: '2-digit',
-          }), // Format as 'Mon-YY' (e.g., 'Mar-24')
-          ttlmonth_energy: Math.ceil(parseFloat(item.ttlmonth_energy)), // Round up the ttlmonth_energy value
+          }), 
+          ttlmonth_energy: Math.ceil(parseFloat(item.ttlmonth_energy)),
         }));
 
         renderChart();
@@ -54,10 +53,15 @@ export default {
     };
 
     const renderChart = () => {
+      // Destroy existing chart instance to prevent duplication
+      if (chartInstance) {
+        chartInstance.destroy();
+      }
+
       const labels = chartData.value.map(item => item.month);
       const data = chartData.value.map(item => item.ttlmonth_energy);
 
-      new Chart(barChart.value, {
+      chartInstance = new Chart(barChart.value, {
         type: 'bar',
         data: {
           labels: labels,
@@ -73,21 +77,28 @@ export default {
           responsive: true,
           maintainAspectRatio: false,
           plugins: {
-            title: { 
+            title: {
               display: true,
-              text: 'Monthly Energy BarChart'
+              text: 'Monthly Energy BarChart',
             },
             legend: {
               display: true,
-              position: 'bottom'
-            }
-          }
-        }
-      }); // Removed the erroneous semicolon and closing brace
+              position: 'bottom',
+            },
+          },
+        },
+      });
     };
 
     onMounted(() => {
       fetchMonthlySummary();
+    });
+
+    onBeforeUnmount(() => {
+      // Destroy the chart instance when the component is unmounted
+      if (chartInstance) {
+        chartInstance.destroy();
+      }
     });
 
     return {

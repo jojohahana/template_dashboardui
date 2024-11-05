@@ -1,9 +1,9 @@
 <template>
-    <div class="flex items-center bg-white border rounded-sm overflow-hidden shadow">
+    <div class="flex items-center overflow-hidden bg-white border rounded-sm shadow w-80">
       <div :class="iconBgClass" class="p-4">
-        <i class="material-icons text-white text-4xl">{{ iconName }}</i>
+        <i class="text-4xl text-white material-icons">{{ iconName }}</i>
       </div>
-      <div class="px-4 text-gray-700">
+      <div class="px-12 text-gray-700">
         <h3 class="text-sm tracking-wider">{{ title }}</h3>
         <p class="text-2xl">{{ value }}</p>
       </div>
