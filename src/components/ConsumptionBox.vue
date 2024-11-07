@@ -5,7 +5,10 @@
     </div>
     <div>
       <h3 class="text-lg font-semibold">{{ title }}</h3>
-      <p class="text-xl font-bold">{{ displayValue }} kWh</p> <!-- Display computed value -->
+      <div class="flex space-x-4">
+        <p class="text-xl font-bold">{{ displayValue }} kWh</p>
+        <p class="text-xl font-bold">{{ displayValue }} kWh</p>
+      </div>
     </div>
   </div>
 </template>
