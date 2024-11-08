@@ -7,10 +7,11 @@
     </div>
 
     <div class="grid grid-cols-1 gap-4 mb-6 sm:grid-cols-2 lg:grid-cols-3">
-      <!-- ConsumptionBox updated to use API data -->
+      <!-- ConsumptionBox updated to use API data for total_value and total_value_in_rupiah -->
       <ConsumptionBox
         title="Consumption Energy"
-        :value="consumptionEnergy"
+        :value="consumptionData.total_value"
+        :valueRupiah="consumptionData.total_value_in_rupiah"
         iconClass="fas fa-bolt"
         iconColor="bg-green-500"
       />
@@ -41,7 +42,10 @@ export default {
   data() {
     return {
       formattedDate: '',
-      consumptionEnergy: null, // Store fetched API value here
+      consumptionData: {
+        total_value: null,
+        total_value_in_rupiah: null,
+      },
       currentStates: [
         { label: 'Exported Energy', value: 7.5, percentage: 58, bgClass: 'bg-blue-200', fillClass: 'bg-indigo-500' },
         { label: 'Selfuse Energy', value: 6.5, percentage: 42, bgClass: 'bg-orange-200', fillClass: 'bg-orange-500' },
@@ -56,23 +60,81 @@ export default {
     },
     async fetchConsumptionEnergy() {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/api/gapvalcons');
-        console.log('Raw API Response:', response.data); // For debugging
-        
-        // Remove HTML comments if they exist in the response
-        const cleanData = JSON.parse(response.data.replace(/<!--|-->/g, '').trim());
-        
-        // Check if value_gap exists in the cleaned data
-        if (cleanData && typeof cleanData.value_gap !== 'undefined') {
-          this.consumptionEnergy = cleanData.value_gap;
-          console.log('Updated consumptionEnergy:', this.consumptionEnergy); // Confirm data update
+        const response = await axios.get('http://127.0.0.1:8000/api/gettrial');
+        console.log('API Response:', response.data);
+
+        // Remove HTML comments if present
+        const cleanedData = JSON.parse(response.data.replace(/<!--|-->/g, '').trim());
+
+        // Check if cleaned data has the required properties
+        if (cleanedData && cleanedData.total_value && cleanedData.total_value_in_rupiah) {
+          this.consumptionData.total_value = cleanedData.total_value;
+          this.consumptionData.total_value_in_rupiah = cleanedData.total_value_in_rupiah;
+
+          console.log('Total Value:', this.consumptionData.total_value);
+          console.log('Total Value in Rupiah:', this.consumptionData.total_value_in_rupiah);
         } else {
-          console.error('value_gap not found in response:', cleanData);
-          this.consumptionEnergy = 'N/A';
+          console.error('API response does not contain the expected properties:', cleanedData);
+          this.consumptionData.total_value = 'N/A';
+          this.consumptionData.total_value_in_rupiah = 'N/A';
         }
       } catch (error) {
         console.error('Error fetching consumption energy:', error);
-        this.consumptionEnergy = 'N/A'; // Set to a default value in case of an error
+        this.consumptionData.total_value = 'N/A';
+        this.consumptionData.total_value_in_rupiah = 'N/A';
+      }
+    }
+  },
+  mounted() {
+    this.formatDate();
+    this.fetchConsumptionEnergy();
+  }
+};
+</script>
+
+
+<!-- <script>
+import axios from 'axios';
+import ConsumptionBox from '../components/ConsumptionBox.vue';
+import EnergyChart from '../components/EnergyChart.vue';
+import CurrentState from '../components/CurrentState.vue';
+
+export default {
+  components: {
+    ConsumptionBox,
+    EnergyChart,
+    CurrentState
+  },
+  data() {
+    return {
+      formattedDate: '',
+      consumptionData: { total_value: null, total_value_in_rupiah: null }, // Data object for API values
+      currentStates: [
+        { label: 'Exported Energy', value: 7.5, percentage: 58, bgClass: 'bg-blue-200', fillClass: 'bg-indigo-500' },
+        { label: 'Selfuse Energy', value: 6.5, percentage: 42, bgClass: 'bg-orange-200', fillClass: 'bg-orange-500' },
+      ]
+    };
+  },
+  methods: {
+    formatDate() {
+      const today = new Date();
+      const options = { weekday: 'long', day: '2-digit', month: 'short', year: 'numeric' };
+      this.formattedDate = today.toLocaleDateString('en-GB', options);
+    },
+      async fetchConsumptionEnergy() {
+      try {
+        console.log('Fetching consumption energy data...');
+        const response = await axios.get('http://127.0.0.1:8000/api/gettrial');
+        console.log('API Response:', response.data); // Logs the full response data
+
+        this.consumptionData.total_value = response.data.total_value;
+        this.consumptionData.total_value_in_rupiah = response.data.total_value_in_rupiah;
+
+        console.log('Total Value:', this.consumptionData.total_value);
+        console.log('Total Value in Rupiah:', this.consumptionData.total_value_in_rupiah);
+      } catch (error) {
+        console.error('Error fetching consumption energy:', error);
+        this.consumptionData = { total_value: 'N/A', total_value_in_rupiah: 'N/A' };
       }
     }
 
@@ -82,4 +144,4 @@ export default {
     this.fetchConsumptionEnergy(); // Fetch data when component is mounted
   }
 };
-</script>
+</script> -->
