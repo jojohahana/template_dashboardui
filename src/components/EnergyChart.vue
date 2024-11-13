@@ -24,9 +24,16 @@ export default {
         chartInstance.destroy();
       }
 
-      // Example data - Replace this with actual data if available
-      const labels = ['2024-11-01', '2024-11-02', '2024-11-03', '2024-11-04', '2024-11-05', '2024-11-06', '2024-11-07', '2024-11-08'];
-      const data = [1000, 3000, 2000, 4000, 5000, 2000, 4500, 2500];
+      // Generate the last 7 days of dates for labels
+      const today = new Date();
+      const labels = Array.from({ length: 7 }, (_, i) => {
+        const date = new Date(today);
+        date.setDate(today.getDate() - (6 - i)); // Go back 6 days to today
+        return date.toISOString().split('T')[0]; // Format date as YYYY-MM-DD
+      });
+
+      // Example data for the last 7 days
+      const data = [1000, 3000, 2000, 4000, 5000, 2000, 4500]; // Example values
 
       chartInstance = new Chart(barChart.value, {
         type: 'bar',

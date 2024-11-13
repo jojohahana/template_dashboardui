@@ -1,13 +1,14 @@
 <template>
   <div class="flex items-center p-4 space-x-4 bg-white rounded-lg shadow">
-    <div :class="`p-6 text-white ${iconColor} rounded-full`">
+    <div :class="`p-3 text-white ${iconColor} rounded-full`">
       <i :class="iconClass"></i>
     </div>
-    <div>
+    <div class="flex-1">
       <h3 class="text-lg font-semibold">{{ title }}</h3>
-      <div class="flex space-x-4">
-        <p class="text-xl font-bold">{{ formattedValue }} kWh</p>
-        <p class="text-xl font-bold">{{ formattedValueRupiah }}</p>
+      <div class="flex flex-wrap items-baseline space-x-2">
+        <!-- Adjust text size and add responsive styling to fit within the box -->
+        <p class="text-2xl font-bold leading-tight text-gray-900">{{ formattedValue }} kWh</p>
+        <p class="text-xl font-semibold leading-tight text-green-600">{{ formattedValueRupiah }}</p>
       </div>
     </div>
   </div>
@@ -41,14 +42,14 @@ export default {
     }
   },
   computed: {
-    // Format total_value as "24.818 kWh" with thousand separators and rounding
+    // Format value to 3 decimal places
     formattedValue() {
       return new Intl.NumberFormat('en-US', {
         minimumFractionDigits: 3,
         maximumFractionDigits: 3
       }).format(this.value / 1000);
     },
-    // Format total_value_in_rupiah as "Rp. 28.381.407,78" with thousand separators and currency symbol
+    // Format valueRupiah with currency symbol for IDR
     formattedValueRupiah() {
       return new Intl.NumberFormat('id-ID', {
         style: 'currency',
@@ -69,3 +70,7 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+/* Additional styling, if needed */
+</style>
