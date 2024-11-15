@@ -10,6 +10,7 @@
 <script>
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import { Chart, BarController, BarElement, CategoryScale, LinearScale, Title, Legend } from 'chart.js';
+import axios from 'axios';
 
 Chart.register(BarController, BarElement, CategoryScale, LinearScale, Title, Legend);
 
@@ -18,22 +19,38 @@ export default {
     const barChart = ref(null);
     let chartInstance = null;
 
-    const renderChart = () => {
-      // Destroy the chart if it already exists
+    const fetchChartData = async () => {
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/api/getdaily');
+
+        // Extract and parse JSON data from response if it contains extraneous markup
+        const jsonDataString = response.data.replace(/<!--|-->/g, ''); // Remove any HTML-like comment tags
+        const apiData = JSON.parse(jsonDataString);
+
+        // Check if apiData is an array and map to labels and data
+        if (!Array.isArray(apiData)) {
+          console.error("Parsed API data is not an array or is empty.");
+          return;
+        }
+
+        const labels = apiData.map(item => item.Tanggal_save);
+        const data = apiData.map(item => item.total_value);
+
+        console.log("Labels:", labels);  // Debugging labels
+        console.log("Data:", data);      // Debugging data
+
+        renderChart(labels, data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+
+
+    const renderChart = (labels, data) => {
       if (chartInstance) {
         chartInstance.destroy();
       }
-
-      // Generate the last 7 days of dates for labels
-      const today = new Date();
-      const labels = Array.from({ length: 7 }, (_, i) => {
-        const date = new Date(today);
-        date.setDate(today.getDate() - (6 - i)); // Go back 6 days to today
-        return date.toISOString().split('T')[0]; // Format date as YYYY-MM-DD
-      });
-
-      // Example data for the last 7 days
-      const data = [1000, 3000, 2000, 4000, 5000, 2000, 4500]; // Example values
 
       chartInstance = new Chart(barChart.value, {
         type: 'bar',
@@ -70,11 +87,10 @@ export default {
     };
 
     onMounted(() => {
-      renderChart();
+      fetchChartData();
     });
 
     onBeforeUnmount(() => {
-      // Clean up the chart instance when the component is unmounted
       if (chartInstance) {
         chartInstance.destroy();
       }
@@ -90,6 +106,6 @@ export default {
 <style scoped>
 .chart-container {
   width: 100%;
-  height: 400px;
+  height: 400px; /* Ensure there is a fixed height */
 }
 </style>
