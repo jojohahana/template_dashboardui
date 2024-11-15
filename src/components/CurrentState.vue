@@ -20,25 +20,25 @@
         </div>
       </div>
 
-      <!-- 3rd State  -->
+      <!-- 2nd State  -->
       <div class="w-full p-4 bg-white rounded-lg shadow lg:w-1/2">
         <h3 class="mb-4 text-lg font-semibold">LWBP - WBP Consumption</h3>
         <ul class="space-y-2">
           <li class="flex justify-between">
-            <span>Maximal Used - 38%</span>
+            <span>LWBP (22:01 - 17:59) - 38%</span>
             <span>0.8 kWh</span>
           </li>
           <li class="flex justify-between">
-            <span>Meter Energy - 27%</span>
+            <span>WBP (18:00 - 22:00) - 27%</span>
             <span>2.358 kWh</span>
           </li>
           <!-- Add other data as needed -->
         </ul>
       </div>
       
-      <!-- 2nd State  -->
+      <!-- 3rd State  -->
       <div class="w-full p-4 bg-white rounded-lg shadow lg:w-1/2">
-        <h3 class="mb-4 text-lg font-semibold">Current State</h3>
+        <h3 class="mb-4 text-lg font-semibold">Consumption Percentage</h3>
         <div class="flex justify-between mb-2">
           <span>Exported Energy - 7.5 kWh</span>
           <span>58%</span>

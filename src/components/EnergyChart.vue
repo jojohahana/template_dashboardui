@@ -10,9 +10,10 @@
 <script>
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import { Chart, BarController, BarElement, CategoryScale, LinearScale, Title, Legend } from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels'; // Import the datalabels plugin
 import axios from 'axios';
 
-Chart.register(BarController, BarElement, CategoryScale, LinearScale, Title, Legend);
+Chart.register(BarController, BarElement, CategoryScale, LinearScale, Title, Legend, ChartDataLabels); // Register the plugin
 
 export default {
   setup() {
@@ -23,11 +24,10 @@ export default {
       try {
         const response = await axios.get('http://127.0.0.1:8000/api/getdaily');
 
-        // Extract and parse JSON data from response if it contains extraneous markup
+        // Parse response to get labels and data
         const jsonDataString = response.data.replace(/<!--|-->/g, ''); // Remove any HTML-like comment tags
         const apiData = JSON.parse(jsonDataString);
 
-        // Check if apiData is an array and map to labels and data
         if (!Array.isArray(apiData)) {
           console.error("Parsed API data is not an array or is empty.");
           return;
@@ -36,16 +36,11 @@ export default {
         const labels = apiData.map(item => item.Tanggal_save);
         const data = apiData.map(item => item.total_value);
 
-        console.log("Labels:", labels);  // Debugging labels
-        console.log("Data:", data);      // Debugging data
-
         renderChart(labels, data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-
-
 
     const renderChart = (labels, data) => {
       if (chartInstance) {
@@ -76,6 +71,17 @@ export default {
               display: true,
               position: 'bottom',
             },
+            datalabels: { // Configure datalabels plugin
+              anchor: 'end',
+              align: 'end',
+              color: '#333',
+              font: {
+                weight: 'bold',
+              },
+              formatter: function(value) {
+                return value; // Show the value on top of each bar
+              }
+            }
           },
           scales: {
             y: {
@@ -106,6 +112,6 @@ export default {
 <style scoped>
 .chart-container {
   width: 100%;
-  height: 400px; /* Ensure there is a fixed height */
+  height: 400px;
 }
 </style>
