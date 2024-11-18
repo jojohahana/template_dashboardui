@@ -10,10 +10,10 @@
 <script>
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import { Chart, BarController, BarElement, CategoryScale, LinearScale, Title, Legend } from 'chart.js';
-import ChartDataLabels from 'chartjs-plugin-datalabels'; // Import the datalabels plugin
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import axios from 'axios';
 
-Chart.register(BarController, BarElement, CategoryScale, LinearScale, Title, Legend, ChartDataLabels); // Register the plugin
+Chart.register(BarController, BarElement, CategoryScale, LinearScale, Title, Legend, ChartDataLabels);
 
 export default {
   setup() {
@@ -24,8 +24,7 @@ export default {
       try {
         const response = await axios.get('http://127.0.0.1:8000/api/getdaily');
 
-        // Parse response to get labels and data
-        const jsonDataString = response.data.replace(/<!--|-->/g, ''); // Remove any HTML-like comment tags
+        const jsonDataString = response.data.replace(/<!--|-->/g, '');
         const apiData = JSON.parse(jsonDataString);
 
         if (!Array.isArray(apiData)) {
@@ -71,7 +70,7 @@ export default {
               display: true,
               position: 'bottom',
             },
-            datalabels: { // Configure datalabels plugin
+            datalabels: {
               anchor: 'end',
               align: 'end',
               color: '#333',
@@ -79,7 +78,7 @@ export default {
                 weight: 'bold',
               },
               formatter: function(value) {
-                return value; // Show the value on top of each bar
+                return (value / 1000).toFixed(3); // Divide by 1000 and format with three decimal places
               }
             }
           },

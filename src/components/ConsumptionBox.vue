@@ -59,7 +59,7 @@ export default {
     }
   },
   mounted() {
-    axios.get('/api/getCostRupiah')
+    axios.get('/api/getCostRupiahToday')
       .then(response => {
         this.wbpLwbpSum = response.data.wbp_lwbp_sum;
         this.costInRupiah = response.data.cost_in_rupiah;

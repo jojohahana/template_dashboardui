@@ -3,7 +3,8 @@ import HomePage from '../views/HomePage.vue'
 import WidgetPage from '../views/WidgetPage.vue'
 import ChartsPage from '../views/ChartsPage.vue'
 import LoginPage from '@/views/LoginPage.vue'
-import AdminPage from '@/views/AdminPage.vue'
+// import AdminPage from '@/views/AdminPage.vue'
+import ContactPage from '@/views/ContactPage.vue'
 // import { Title } from 'chart.js'
 // import axios from 'axios'
 
@@ -33,11 +34,10 @@ const routes = [
   },
 
 
-  // trial for admin page
   {
-    path: '/admin',
-    name: 'Admin',
-    component: AdminPage
+    path: '/contact',
+    name: 'Contact',
+    component: ContactPage
   },
 
  
