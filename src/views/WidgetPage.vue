@@ -82,32 +82,6 @@ export default {
   mounted() {
     this.fetchSummaryData();
   },
-  // methods: {
-  //   async fetchSummaryData() {
-  //     try {
-  //       const response = await axios.get('http://localhost:8000/api/summary', {
-  //         params: {
-  //           year: 2024,
-  //           month: 5,
-  //         },
-  //       });
-        
-  //       console.log('API Response:', response.data);
-
-  //       if (response.data && response.data.total_energy) {
-  //         this.totalSolarEnergy = response.data.total_energy + ' kWh';
-  //       } else {
-  //         this.totalSolarEnergy = 'Error: No data';
-  //       }
-
-  //       console.log('Total Solar Energy:', this.totalSolarEnergy);
-        
-  //     } catch (error) {
-  //       console.error('Error Fetching Summary Data:', error);
-  //       this.totalSolarEnergy = 'Error';
-  //     }
-  //   },
-  // },
 
   methods: {
   async fetchSummaryData() {
