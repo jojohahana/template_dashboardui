@@ -12,7 +12,7 @@
         title="Consumption Energy"
         :value="consumptionData.total_value"
         :valueRupiah="consumptionData.total_value_in_rupiah"
-        iconClass="fas fa-bolt"
+        iconClass="fa fa-bolt"
         iconColor="bg-green-500"
       />
       <ConsumptionBox title="PLN" :value="301" iconClass="fas fa-sun" iconColor="bg-blue-500" />

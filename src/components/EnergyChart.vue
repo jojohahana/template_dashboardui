@@ -42,7 +42,7 @@ export default {
         }
 
         const labels = apiData.map(item => item.Tanggal_save);
-        const data = apiData.map(item => item.total_value);
+        const data = apiData.map(item => item.total_gap_value);
 
         renderBarChart(labels, data);
         renderDoughnutChart(data);
