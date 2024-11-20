@@ -7,24 +7,23 @@
     </div>
 
     <div class="grid grid-cols-1 gap-4 mb-6 sm:grid-cols-2 lg:grid-cols-3">
-      <!-- ConsumptionBox updated to use API data for total_value and total_value_in_rupiah -->
       <ConsumptionBox
         title="Consumption Energy"
         :value="consumptionData.total_gap_value"
         :valueRupiah="consumptionData.total_cost_value"
-        iconClass="fa fa-bolt"
+        iconClass="fas fa-industry"
         iconColor="bg-green-500"
       />
       <ConsumptionBox 
         title="PLN" 
         :value="301" 
-        iconClass="fas fa-sun" 
+        iconClass="fas fa-bolt-lightning" 
         iconColor="bg-blue-500" 
       />
       <ConsumptionBox 
         title="PLTS" 
         :value="189" 
-        iconClass="fas fa-leaf" 
+        iconClass="fas fa-solar-panel" 
         iconColor="bg-yellow-500" />
     </div>
 

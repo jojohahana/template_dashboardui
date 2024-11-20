@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-center p-4 space-x-4 bg-white rounded-lg shadow">
-    <div :class="`p-3 text-white ${iconColor} rounded-full`">
+    <div :class="`p-4 text-white ${iconColor} rounded-full`">
       <i :class="iconClass"></i>
     </div>
     <div class="flex-1">

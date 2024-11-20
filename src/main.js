@@ -3,7 +3,9 @@ import App from './App.vue';
 import router from './router';
 import './index.css'; // TailwindCSS Declare
 import axios from './axios'; // Import the configured axios
-import '@mdi/font/css/materialdesignicons.css';
+import '@fortawesome/fontawesome-free/css/all.css';
+
+
 
 // Get the CSRF token default for Axios
 const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
