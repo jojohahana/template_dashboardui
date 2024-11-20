@@ -8,7 +8,7 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
-      backgroundColor: '#2596be',
+      bgChart: '#133E87',
     },
   },
   variants: {

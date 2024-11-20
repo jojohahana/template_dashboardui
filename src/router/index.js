@@ -13,7 +13,7 @@ const routes = [
     path: '/',
     name: 'Home',
     component: HomePage,
-    meta: { Title: 'Home Page'}
+    meta: { Title: 'Home Page'},
   },
 
   {
@@ -37,7 +37,8 @@ const routes = [
   {
     path: '/contact',
     name: 'Contact',
-    component: ContactPage
+    component: ContactPage,
+    meta: {Title: 'Test Page'}
   },
 
  
