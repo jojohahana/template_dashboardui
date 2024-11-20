@@ -42,24 +42,25 @@ export default {
     }
   },
   computed: {
-    // Format value to 3 decimal places
-    formattedValue() {
-      return new Intl.NumberFormat('en-US', {
-        minimumFractionDigits: 3,
-        maximumFractionDigits: 3
-      }).format(this.value / 1000);
-    },
-    // Format valueRupiah with currency symbol for IDR
-    formattedValueRupiah() {
-      return new Intl.NumberFormat('id-ID', {
-        style: 'currency',
-        currency: 'IDR',
-        minimumFractionDigits: 2
-      }).format(this.valueRupiah);
-    }
+  // Format value (gap) to kWh with 3 decimal places
+  formattedValue() {
+    return new Intl.NumberFormat('en-US', {
+      minimumFractionDigits: 3,
+      maximumFractionDigits: 3
+    }).format(this.value / 1000); // Convert from Wh to kWh
   },
+  // Format valueRupiah with currency symbol for IDR
+  formattedValueRupiah() {
+    return new Intl.NumberFormat('id-ID', {
+      style: 'currency',
+      currency: 'IDR',
+      minimumFractionDigits: 0 // Use 0 decimals for rounded values
+    }).format(this.valueRupiah);
+  }
+}
+,
   mounted() {
-    axios.get('/api/getCostRupiahToday')
+    axios.get('/api/getvaltoday')
       .then(response => {
         this.wbpLwbpSum = response.data.wbp_lwbp_sum;
         this.costInRupiah = response.data.cost_in_rupiah;

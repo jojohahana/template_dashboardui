@@ -10,13 +10,22 @@
       <!-- ConsumptionBox updated to use API data for total_value and total_value_in_rupiah -->
       <ConsumptionBox
         title="Consumption Energy"
-        :value="consumptionData.total_value"
-        :valueRupiah="consumptionData.total_value_in_rupiah"
+        :value="consumptionData.total_gap_value"
+        :valueRupiah="consumptionData.total_cost_value"
         iconClass="fa fa-bolt"
         iconColor="bg-green-500"
       />
-      <ConsumptionBox title="PLN" :value="301" iconClass="fas fa-sun" iconColor="bg-blue-500" />
-      <ConsumptionBox title="PLTS" :value="189" iconClass="fas fa-leaf" iconColor="bg-yellow-500" />
+      <ConsumptionBox 
+        title="PLN" 
+        :value="301" 
+        iconClass="fas fa-sun" 
+        iconColor="bg-blue-500" 
+      />
+      <ConsumptionBox 
+        title="PLTS" 
+        :value="189" 
+        iconClass="fas fa-leaf" 
+        iconColor="bg-yellow-500" />
     </div>
 
     <EnergyChart />
@@ -58,30 +67,76 @@ export default {
     },
     async fetchConsumptionEnergy() {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/api/gettrial');
-        console.log('API Response:', response.data);
+        const response = await axios.get('http://127.0.0.1:8000/api/getvaltoday');
+        console.log('Raw API Response:', response.data);
 
-        // Remove HTML comments if present
-        const cleanedData = JSON.parse(response.data.replace(/<!--|-->/g, '').trim());
+        // Check if the response contains HTML comments and remove them
+        const cleanedDataString = response.data.replace(/<!--|-->/g, '').trim();
+        const cleanedData = JSON.parse(cleanedDataString);
 
-        // Check if cleaned data has the required properties
-        if (cleanedData && cleanedData.total_value && cleanedData.total_value_in_rupiah) {
-          this.consumptionData.total_value = cleanedData.total_value;
-          this.consumptionData.total_value_in_rupiah = cleanedData.total_value_in_rupiah;
+        console.log('Cleaned API Data:', cleanedData);
 
-          console.log('Total Value:', this.consumptionData.total_value);
-          console.log('Total Value in Rupiah:', this.consumptionData.total_value_in_rupiah);
-        } else {
-          console.error('API response does not contain the expected properties:', cleanedData);
-          this.consumptionData.total_value = 'N/A';
-          this.consumptionData.total_value_in_rupiah = 'N/A';
-        }
+        // Assign cleaned values to consumptionData
+        this.consumptionData.total_gap_value = cleanedData.total_gap_value || 0;
+        this.consumptionData.total_cost_value = cleanedData.total_cost_value || 0;
+
+        console.log('Total Gap Value:', this.consumptionData.total_gap_value);
+        console.log('Total Cost Value:', this.consumptionData.total_cost_value);
       } catch (error) {
         console.error('Error fetching consumption energy:', error);
-        this.consumptionData.total_value = 'N/A';
-        this.consumptionData.total_value_in_rupiah = 'N/A';
+
+        // Assign default fallback values in case of an error
+        this.consumptionData.total_gap_value = 0;
+        this.consumptionData.total_cost_value = 0;
       }
-    }
+}
+
+  //   async fetchConsumptionEnergy() {
+  //   try {
+  //     const response = await axios.get('http://127.0.0.1:8000/api/getvaltoday');
+  //     console.log('API Response:', response.data);
+
+  //     // Directly assign API values to the consumptionData properties
+  //     this.consumptionData.total_gap_value = response.data.total_gap_value || 0;
+  //     this.consumptionData.total_cost_value = response.data.total_cost_value || 0;
+
+  //     console.log('Total Gap Value:', this.consumptionData.total_gap_value);
+  //     console.log('Total Cost Value:', this.consumptionData.total_cost_value);
+  //   } catch (error) {
+  //     console.error('Error fetching consumption energy:', error);
+
+  //     // Assign default fallback values in case of an error
+  //     this.consumptionData.total_gap_value = 0;
+  //     this.consumptionData.total_cost_value = 0;
+  //   }
+  // }
+
+    // async fetchConsumptionEnergy() {
+    //   try {
+    //     const response = await axios.get('http://127.0.0.1:8000/api/getvaltoday');
+    //     console.log('API Response:', response.data);
+
+    //     // Remove HTML comments if present
+    //     const cleanedData = JSON.parse(response.data.replace(/<!--|-->/g, '').trim());
+
+    //     // Check if cleaned data has the required properties
+    //     if (cleanedData && cleanedData.total_value && cleanedData.total_value_in_rupiah) {
+    //       this.consumptionData.total_value = cleanedData.total_value;
+    //       this.consumptionData.total_value_in_rupiah = cleanedData.total_value_in_rupiah;
+
+    //       console.log('Total Value:', this.consumptionData.total_value);
+    //       console.log('Total Value in Rupiah:', this.consumptionData.total_value_in_rupiah);
+    //     } else {
+    //       console.error('API response does not contain the expected properties:', cleanedData);
+    //       this.consumptionData.total_value = 'N/A';
+    //       this.consumptionData.total_value_in_rupiah = 'N/A';
+    //     }
+    //   } catch (error) {
+    //     console.error('Error fetching consumption energy:', error);
+    //     this.consumptionData.total_value = 'N/A';
+    //     this.consumptionData.total_value_in_rupiah = 'N/A';
+    //   }
+    // }
   },
   mounted() {
     this.formatDate();
