@@ -8,7 +8,7 @@
       <div class="flex flex-wrap items-baseline space-x-2">
         <!-- Adjust text size and add responsive styling to fit within the box -->
         <p class="text-2xl font-bold leading-tight text-gray-900">{{ formattedValue }} kWh</p>
-        <p class="text-xl font-semibold leading-tight text-green-600">{{ formattedValueRupiah }}</p>
+        <p class="text-xl font-semibold leading-tight text-blue-800">{{ formattedValueRupiah }}</p>
       </div>
     </div>
   </div>

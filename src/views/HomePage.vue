@@ -12,18 +12,24 @@
     </div>
     <div v-else>
       <div class="grid grid-cols-1 gap-4 mb-6 sm:grid-cols-2 lg:grid-cols-3">
-        <ConsumptionBox
-          title="Consumption Energy"
-          :value="consumptionData.total_gap_value"
-          :valueRupiah="consumptionData.total_cost_value"
-          iconClass="fas fa-industry"
-          iconColor="bg-green-500"
-        />
+        <!-- ConsumptionBox with animate-ping -->
+        <div class="relative">
+          <div class="absolute top-0 left-0 w-12 h-12 bg-green-400 rounded-full opacity-75 animate-ping"></div>
+          <ConsumptionBox
+            title="Consumption Energy"
+            :value="consumptionData.total_gap_value"
+            :valueRupiah="consumptionData.total_cost_value"
+            iconClass="fas fa-industry"
+            iconColor="bg-green-500"
+          />
+        </div>
+
+        <!-- Other ConsumptionBoxes -->
         <ConsumptionBox 
           title="PLN" 
           :value="301" 
           iconClass="fas fa-bolt-lightning" 
-          iconColor="bg-blue-500" 
+          iconColor="bg-blue-800" 
         />
         <ConsumptionBox 
           title="PLTS" 
