@@ -16,7 +16,7 @@
         </div>
         <PopoverGroup class="hidden lg:flex lg:gap-x-12">
           <router-link to="/" class="text-sm font-semibold leading-6 text-gray-900 nav-link">Home</router-link>
-          <router-link to="/contact" class="text-sm font-semibold leading-6 text-gray-900 nav-link">Energy Area</router-link>
+          <router-link to="/area" class="text-sm font-semibold leading-6 text-gray-900 nav-link">Energy Area</router-link>
           <router-link to="/widget" class="text-sm font-semibold leading-6 text-gray-900 nav-link">Widget</router-link>
           <router-link to="/charts" class="text-sm font-semibold leading-6 text-gray-900 nav-link">Charts</router-link>
           <!-- Start Multiple Navbar Child Menu Desktop View -->

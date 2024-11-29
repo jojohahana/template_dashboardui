@@ -4,7 +4,7 @@ import WidgetPage from '../views/WidgetPage.vue'
 import ChartsPage from '../views/ChartsPage.vue'
 import LoginPage from '@/views/LoginPage.vue'
 // import AdminPage from '@/views/AdminPage.vue'
-import ContactPage from '@/views/ContactPage.vue'
+import AreaPage from '@/views/AreaPage.vue'
 // import { Title } from 'chart.js'
 // import axios from 'axios'
 
@@ -35,10 +35,9 @@ const routes = [
 
 
   {
-    path: '/contact',
-    name: 'Contact',
-    component: ContactPage,
-    meta: {Title: 'Test Page'}
+    path: '/area',
+    name: 'Area',
+    component: AreaPage
   },
 
  
