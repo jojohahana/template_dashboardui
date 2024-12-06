@@ -42,7 +42,7 @@
       <EnergyChart />
     </div>
 
-    <CurrentState />
+    <!-- <CurrentState /> -->
   </div>
 </template>
 
@@ -50,13 +50,13 @@
 import axios from 'axios';
 import ConsumptionBox from '../components/ConsumptionBox.vue';
 import EnergyChart from '../components/EnergyChart.vue';
-import CurrentState from '../components/CurrentState.vue';
+// import CurrentState from '../components/CurrentState.vue';
 
 export default {
   components: {
     ConsumptionBox,
     EnergyChart,
-    CurrentState
+    // CurrentState
   },
   data() {
     return {

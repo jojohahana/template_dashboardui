@@ -22,11 +22,11 @@ export default {
     },
     value: {
       type: [String, Number],
-      default: 0, // Default value if prop is not provided
+      default: null, // Default to null if no value is provided
     },
     valueRupiah: {
       type: [String, Number],
-      default: 0, // Default value if prop is not provided
+      default: null, // Default to null if no value is provided
     },
     color: {
       type: String,
@@ -39,12 +39,18 @@ export default {
   },
   computed: {
     formattedValue() {
-      return this.value ? `${this.value} kWh` : "0 kWh";
+      if (this.value === null || this.value === undefined) {
+        return "Loading..."; // Fallback if the value is not provided
+      }
+      return `${this.value} kWh`;
     },
     formattedValueRupiah() {
-      return this.valueRupiah
-        ? `Rp. ${Number(this.valueRupiah).toLocaleString("id-ID").replace(/,/g, ".")}`
-        : "Rp. 0";
+      if (this.valueRupiah === null || this.valueRupiah === undefined) {
+        return "Loading..."; // Fallback if the valueRupiah is not provided
+      }
+      return `Rp. ${Number(this.valueRupiah)
+        .toLocaleString("id-ID")
+        .replace(/,/g, ".")}`;
     },
   },
 };

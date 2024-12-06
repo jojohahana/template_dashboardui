@@ -28,43 +28,49 @@ export default {
       row1Data: [
         {
           title: "HVAC",
-          value: null, // Placeholder for future data
-          valueRupiah: null,
+          api: "http://127.0.0.1:8000/api/getdayebeam",
+          value: "Loading...", // Default value until data is fetched
+          valueRupiah: "Loading...",
           color: "bg-blue-500",
           iconClass: "fas fa-wind",
         },
         {
           title: "Injection",
-          value: null,
-          valueRupiah: null,
+          api: "http://127.0.0.1:8000/api/getdayebeam",
+          value: "Loading...",
+          valueRupiah: "Loading...",
           color: "bg-green-500",
           iconClass: "fas fa-syringe",
         },
         {
           title: "Compressor",
-          value: null,
-          valueRupiah: null,
+          api: "http://127.0.0.1:8000/api/getdayebeam",
+          value: "Loading...",
+          valueRupiah: "Loading...",
           color: "bg-red-500",
           iconClass: "fas fa-compress",
         },
         {
-          title: "E-Beam", // E-Beam data to be updated from API
-          value: "Loading...", // Default until API data arrives
+          title: "E-Beam",
+          api: "http://127.0.0.1:8000/api/getdayebeam",
+          value: "Loading...",
           valueRupiah: "Loading...",
           color: "bg-yellow-500",
           iconClass: "fas fa-bolt",
         },
         {
           title: "ETO",
-          value: null,
-          valueRupiah: null,
+          api: "http://127.0.0.1:8000/api/getdayeto",
+          value: "Loading...",
+          valueRupiah: "Loading...",
           color: "bg-purple-500",
           iconClass: "fas fa-vial",
         },
         {
           title: "Blood Bag",
-          value: null,
-          valueRupiah: null,
+          api: "http://127.0.0.1:8000/api/getdayebeam",
+          value: "Loading...",
+          valueRupiah: "Loading...",
           color: "bg-indigo-500",
           iconClass: "fas fa-heartbeat",
         },
@@ -72,37 +78,37 @@ export default {
     };
   },
   mounted() {
-    this.fetchEbeamData();
+    this.fetchAllData();
+    console.log("Received props:", this.value, this.valueRupiah);
   },
   methods: {
-    async fetchEbeamData() {
-  try {
-    const response = await axios.get("http://127.0.0.1:8000/api/getdayebeam");
-    console.log("API Response:", response.data); // Debugging line
+    async fetchAllData() {
+      const promises = this.row1Data.map((item, index) =>
+        this.fetchDataForItem(item.api, index)
+      );
 
-    // Check if response.data is valid and contains expected properties
-    const total_cons_ebeam = response.data?.total_cons_ebeam ?? 0;
-    const total_cost_ebeam = response.data?.total_cost_ebeam ?? 0;
+      // Wait for all API calls to complete
+      await Promise.all(promises);
+    },
+    async fetchDataForItem(apiUrl, index) {
+      try {
+        const response = await axios.get(apiUrl);
 
-    const ebeamIndex = this.row1Data.findIndex((item) => item.title === "E-Beam");
-    if (ebeamIndex !== -1) {
-      this.row1Data[ebeamIndex].value = `${total_cons_ebeam} kWh`;
-      this.row1Data[ebeamIndex].valueRupiah = `Rp. ${total_cost_ebeam
-        .toLocaleString("id-ID")
-        .replace(/,/g, ".")}`;
-    }
-  } catch (error) {
-    console.error("Error fetching E-Beam data:", error);
+        // Extract data safely
+        const totalConsumption = response.data?.total_cons ?? 0; // Default to 0 if not found
+        const totalCost = response.data?.total_cost ?? 0; // Default to 0 if not found
 
-    // Handle error case
-    const ebeamIndex = this.row1Data.findIndex((item) => item.title === "E-Beam");
-    if (ebeamIndex !== -1) {
-      this.row1Data[ebeamIndex].value = "Error fetching data";
-      this.row1Data[ebeamIndex].valueRupiah = "Error";
-    }
-  }
-}
-,
+        // Update the specific item in `row1Data`
+        this.row1Data[index].value = totalConsumption;
+        this.row1Data[index].valueRupiah = totalCost;
+      } catch (error) {
+        console.error(`Error fetching data from ${apiUrl}:`, error);
+
+        // Handle error case by setting fallback values
+        this.row1Data[index].value = 0;
+        this.row1Data[index].valueRupiah = 0;
+      }
+    },
   },
 };
 </script>
