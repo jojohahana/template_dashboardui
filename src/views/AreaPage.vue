@@ -27,7 +27,7 @@ export default {
     return {
       row1Data: [
         {
-          title: "HVAC",
+          title: "HVAC 1",
           api: "http://127.0.0.1:8000/api/getdayebeam",
           value: "Loading...", // Default value until data is fetched
           valueRupiah: "Loading...",
