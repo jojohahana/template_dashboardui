@@ -1,5 +1,9 @@
 <template>
-  <div class="p-4 rounded-lg shadow-lg cursor-pointer hover:shadow-xl" :class="color" @click="toggleCollapse">
+  <div
+    class="p-4 rounded-lg shadow-lg cursor-pointer hover:shadow-xl"
+    :style="{ backgroundColor: color }"
+    @click="toggleCollapse"
+  >
     <div class="flex items-center">
       <div class="w-10 h-10 mr-4 text-white">
         <i :class="iconClass" class="text-xl"></i>
@@ -19,17 +23,16 @@
           v-for="(item, index) in detailData"
           :key="index"
           class="p-2 bg-gray-100 rounded cursor-pointer hover:bg-gray-200"
-          @click="selectSubDetail(item)"
+          @click="toggleDetail(index)"
         >
           {{ item }}
+          <div v-if="isDetailCollapsed(index)" class="p-2 mt-2 rounded bg-blue-50">
+            <p class="font-semibold text-gray-700">Selected: {{ item }}</p>
+            <p class="text-gray-700">0 kWh</p>
+            <p class="text-gray-700">Rp. 0</p>
+          </div>
         </li>
       </ul>
-
-      <div v-if="selectedDetail" class="p-4 mt-4 bg-green-100 rounded-lg">
-        <p class="font-semibold text-gray-700">Selected: {{ selectedDetail }}</p>
-        <p class="text-gray-700">0 kWh</p>
-        <p class="text-gray-700">Rp. 0</p>
-      </div>
     </div>
   </div>
 </template>
@@ -40,14 +43,14 @@ export default {
     title: String,
     value: [String, Number],
     valueRupiah: [String, Number],
-    color: String,
+    color: String, // Expecting hex color code
     iconClass: String,
     detailData: Array,
-    isCollapsed: Boolean, // Passed from parent to toggle visibility
+    isCollapsed: Boolean,
   },
   data() {
     return {
-      selectedDetail: null, // Tracks which sub-area detail is selected
+      collapsedDetails: [],
     };
   },
   computed: {
@@ -64,8 +67,15 @@ export default {
     toggleCollapse() {
       this.$emit("toggleCollapse");
     },
-    selectSubDetail(detail) {
-      this.selectedDetail = detail;
+    toggleDetail(index) {
+      if (this.collapsedDetails.includes(index)) {
+        this.collapsedDetails = this.collapsedDetails.filter((i) => i !== index);
+      } else {
+        this.collapsedDetails.push(index);
+      }
+    },
+    isDetailCollapsed(index) {
+      return this.collapsedDetails.includes(index);
     },
   },
 };
