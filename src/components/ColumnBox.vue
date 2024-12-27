@@ -1,10 +1,6 @@
 <template>
-  <div
-    class="p-4 rounded-lg shadow-lg cursor-pointer hover:shadow-xl"
-    :style="{ backgroundColor: color }"
-    @click="toggleCollapse"
-  >
-    <div class="flex items-center">
+  <div class="p-4 rounded-lg shadow-lg cursor-pointer hover:shadow-xl" :style="{backgroundColor: color}">
+    <div class="flex items-center" @click="toggleCollapse">
       <div class="w-10 h-10 mr-4 text-white">
         <i :class="iconClass" class="text-xl"></i>
       </div>
@@ -26,6 +22,7 @@
           @click="toggleDetail(index)"
         >
           {{ item }}
+          <!-- Nested Collapse -->
           <div v-if="isDetailCollapsed(index)" class="p-2 mt-2 rounded bg-blue-50">
             <p class="font-semibold text-gray-700">Selected: {{ item }}</p>
             <p class="text-gray-700">0 kWh</p>
@@ -43,14 +40,14 @@ export default {
     title: String,
     value: [String, Number],
     valueRupiah: [String, Number],
-    color: String, // Expecting hex color code
+    color: String,
     iconClass: String,
     detailData: Array,
-    isCollapsed: Boolean,
+    isCollapsed: Boolean, // Passed from parent to toggle visibility
   },
   data() {
     return {
-      collapsedDetails: [],
+      collapsedDetails: [], // Tracks which details are collapsed
     };
   },
   computed: {

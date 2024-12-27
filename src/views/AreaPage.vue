@@ -28,12 +28,12 @@ export default {
   data() {
     return {
       rowData: [
-        { title: "HVAC", api: "http://127.0.0.1:8000/api/getdayebeam", color: "#49958C", iconClass: "fas fa-wind", details: ["HVAC 1", "HVAC 2", "HVAC 3"] },
+        { title: "HVAC", api: "http://127.0.0.1:8000/api/getdayebeam", color: "#b7baec", iconClass: "fas fa-wind", details: ["HVAC 1", "HVAC 2", "HVAC 3"] },
         { title: "Injection", api: "http://127.0.0.1:8000/api/getdayebeam", color: "#10b981", iconClass: "fas fa-syringe", details: ["Injection 1", "Injection 2", "Injection 3", "Injection 4"] },
-        { title: "LVMDP", api: "http://127.0.0.1:8000/api/getdayebeam", color: "#facc15", iconClass: "fas fa-box", details: ["LVMDP 1", "LVMDP 2"] },
-        { title: "Compressor", api: "http://127.0.0.1:8000/api/getdayebeam", color: "#ef4444", iconClass: "fas fa-warehouse", details: ["Compressor 1", "Compressor 2", "Compressor 3"] },
-        { title: "Cubical", api: "http://127.0.0.1:8000/api/getdayebeam", color: "#a855f7", iconClass: "fas fa-building", details: ["Floor 1", "Floor 2"] },
-        { title: "E-Beam", api: "http://127.0.0.1:8000/api/getdayebeam", color: "#6b7280", iconClass: "fas fa-tools", details: ["Area 1", "Area 2"] },
+        { title: "LVMDP", api: "http://127.0.0.1:8000/api/getdayebeam", color: "#e6dc93", iconClass: "fas fa-box", details: ["LVMDP 1", "LVMDP 2"] },
+        { title: "Compressor", api: "http://127.0.0.1:8000/api/getdayebeam", color: "#eca693", iconClass: "fas fa-warehouse", details: ["Compressor 1", "Compressor 2", "Compressor 3"] },
+        { title: "Cubical", api: "http://127.0.0.1:8000/api/getdayebeam", color: "#7bd4e0", iconClass: "fas fa-building", details: ["Floor 1", "Floor 2"] },
+        { title: "E-Beam", api: "http://127.0.0.1:8000/api/getdayebeam", color: "#ff7a7f", iconClass: "fas fa-tools", details: ["Area 1", "Area 2"] },
         { title: "ETO", api: "http://127.0.0.1:8000/api/getdayebeam", color: "#4CA9CB", iconClass: "fas fa-tools", details: ["Area 1", "Area 2"] },
       ],
       collapsedIndex: null, // Tracks which column is collapsed
