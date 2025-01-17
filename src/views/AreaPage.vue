@@ -36,6 +36,7 @@ export default {
         { title: "E-Beam", api: "http://127.0.0.1:8000/api/getdayebeam", color: "#49958C", iconClass: "fas fa-tools", details: ["Area 1", "Area 2"] },
         { title: "ETO", api: "http://127.0.0.1:8000/api/getdayebeam", color: "#4CA9CB", iconClass: "fas fa-tools", details: ["Area 1", "Area 2"] },
         { title: "Numedik", api: "http://127.0.0.1:8000/api/getdayebeam", color: "#49958C", iconClass: "fas fa-tools", details: ["Area 1", "Area 2"] },
+        { title: "Boiler", api: "http://127.0.0.1:8000/api/getdayebeam", color: "#4CA9CB", iconClass: "fas fa-tools", details: ["Area 1", "Area 2"] },
       ],
       collapsedIndex: null, // Tracks which column is collapsed
     };
