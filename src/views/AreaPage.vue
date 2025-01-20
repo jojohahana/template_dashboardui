@@ -38,7 +38,7 @@ export default {
           title: "HVAC",  
           api: "http://127.0.0.1:8000/api/hvacttl",  
           color: "#4CA9CB",  
-          iconClass: "fas fa-wind",  
+          iconClass: "fas fa-fan",  
           value: null,  
           valueRupiah: null,  
           details: [  
@@ -51,7 +51,7 @@ export default {
           title: "INJECTION",  
           api: "http://127.0.0.1:8000/api/injectttl",  
           color: "#49958C",  
-          iconClass: "fas fa-tint",  
+          iconClass: "fas fa-syringe",  
           value: null,  
           valueRupiah: null,  
           details: [  
@@ -63,7 +63,7 @@ export default {
           title: "COMPRESSOR",  
           api: "http://127.0.0.1:8000/api/compressttl",  
           color: "#4CA9CB",  
-          iconClass: "fas fa-tint",  
+          iconClass: "fas fa-hard-drive",  
           value: null,  
           valueRupiah: null,  
           details: [  
@@ -76,7 +76,7 @@ export default {
           title: "LVMDP",  
           api: "http://127.0.0.1:8000/api/lvmdpttl",  
           color: "#49958C",  
-          iconClass: "fas fa-tint",  
+          iconClass: "fas fa-charging-station",  
           value: null,  
           valueRupiah: null,  
           details: [  
@@ -88,7 +88,7 @@ export default {
           title: "BOILER",  
           api: "http://127.0.0.1:8000/api/boiler",  
           color: "#4CA9CB",  
-          iconClass: "fas fa-tint",  
+          iconClass: "fas fa-biohazard",  
           value: null,  
           valueRupiah: null,  
           details: [  
@@ -99,7 +99,7 @@ export default {
           title: "CUBICAL",  
           api: "http://127.0.0.1:8000/api/cubical",  
           color: "#49958C",  
-          iconClass: "fas fa-tint",  
+          iconClass: "fas fa-flask-vial",  
           value: null,  
           valueRupiah: null,  
           details: [  
@@ -110,7 +110,7 @@ export default {
           title: "EBEAM",  
           api: "http://127.0.0.1:8000/api/ebeam",  
           color: "#4CA9CB",  
-          iconClass: "fas fa-tint",  
+          iconClass: "fas fa-bandage",  
           value: null,  
           valueRupiah: null,  
           details: [  
@@ -121,7 +121,7 @@ export default {
           title: "ETO",  
           api: "http://127.0.0.1:8000/api/eto",  
           color: "#49958C",  
-          iconClass: "fas fa-tint",  
+          iconClass: "fas fa-kit-medical",  
           value: null,  
           valueRupiah: null,  
           details: [  
@@ -132,7 +132,7 @@ export default {
           title: "NUMEDIK",  
           api: "http://127.0.0.1:8000/api/numedik",  
           color: "#4CA9CB",  
-          iconClass: "fas fa-tint",  
+          iconClass: "fas fa-shield-virus",  
           value: null,  
           valueRupiah: null,  
           details: [  
@@ -156,16 +156,20 @@ export default {
     async fetchDataForSection(apiUrl, index) {  
       try {  
         const response = await axios.get(apiUrl);  
-        const data = response.data; // Get the response data  
+        // Clean the response by removing HTML comment tags  
+        const cleanedDataString = response.data.replace(/<!--|-->/g, '').trim();  
+        const data = JSON.parse(cleanedDataString); // Parse the cleaned string  
+      
         const key = Object.keys(data)[0]; // Get the first key (date)  
         const totalConsumption = data[key]?.total_gap_value ?? 0; // Extract total_gap_value  
         const totalCost = data[key]?.total_cost_value ?? 0; // Extract total_cost_value  
-        this.rowData[index].value = totalConsumption;  
-        this.rowData[index].valueRupiah = totalCost;  
+      
+        this.rowData[index].value = totalConsumption; // Assign to the main section value  
+        this.rowData[index].valueRupiah = totalCost; // Assign to the main section valueRupiah  
       } catch (error) {  
         console.error(`Error fetching data from ${apiUrl}:`, error);  
-        this.rowData[index].value = 0; // Set to 0 if there's an error  
-        this.rowData[index].valueRupiah = 0; // Set to 0 if there's an error  
+        this.rowData[index].value = "N/A"; // Set to N/A on error  
+        this.rowData[index].valueRupiah = "N/A"; // Set to N/A on error  
       }  
     },  
     toggleCollapse(index) {  
