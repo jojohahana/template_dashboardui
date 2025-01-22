@@ -92,7 +92,7 @@ export default {
           value: null,  
           valueRupiah: null,  
           details: [  
-            { name: "Compressor 1", api: "http://127.0.0.1:8000/api/lvmdpone", value: null, cost: null, isExpanded: false, isLoading: false },   
+            { name: "Boiler", api: "http://127.0.0.1:8000/api/boiler", value: null, cost: null, isExpanded: false, isLoading: false },   
           ],  
         },  
         {  
@@ -103,7 +103,7 @@ export default {
           value: null,  
           valueRupiah: null,  
           details: [  
-            { name: "Compressor 1", api: "http://127.0.0.1:8000/api/lvmdpone", value: null, cost: null, isExpanded: false, isLoading: false },   
+            { name: "Cubical", api: "http://127.0.0.1:8000/api/cubical", value: null, cost: null, isExpanded: false, isLoading: false },   
           ],  
         },  
         {  
@@ -114,7 +114,7 @@ export default {
           value: null,  
           valueRupiah: null,  
           details: [  
-            { name: "Compressor 1", api: "http://127.0.0.1:8000/api/lvmdpone", value: null, cost: null, isExpanded: false, isLoading: false },   
+            { name: "Ebeam", api: "http://127.0.0.1:8000/api/ebeam", value: null, cost: null, isExpanded: false, isLoading: false },   
           ],  
         },  
         {  
@@ -125,7 +125,7 @@ export default {
           value: null,  
           valueRupiah: null,  
           details: [  
-            { name: "Compressor 1", api: "http://127.0.0.1:8000/api/lvmdpone", value: null, cost: null, isExpanded: false, isLoading: false },   
+            { name: "ETO", api: "http://127.0.0.1:8000/api/eto", value: null, cost: null, isExpanded: false, isLoading: false },   
           ],  
         },  
         {  
@@ -136,7 +136,7 @@ export default {
           value: null,  
           valueRupiah: null,  
           details: [  
-            { name: "Compressor 1", api: "http://127.0.0.1:8000/api/lvmdpone", value: null, cost: null, isExpanded: false, isLoading: false },   
+            { name: "Numedik", api: "http://127.0.0.1:8000/api/numedik", value: null, cost: null, isExpanded: false, isLoading: false },   
           ],  
         },  
       ],  
