@@ -57,6 +57,8 @@ export default {
           details: [  
             { name: "Injection 1", api: "http://127.0.0.1:8000/api/injectone", value: null, cost: null, isExpanded: false, isLoading: false },  
             { name: "Injection 2", api: "http://127.0.0.1:8000/api/injecttwo", value: null, cost: null, isExpanded: false, isLoading: false },  
+            { name: "Injection 3", api: "http://127.0.0.1:8000/api/injectthree", value: null, cost: null, isExpanded: false, isLoading: false },  
+            { name: "Injection 4", api: "http://127.0.0.1:8000/api/injectfour", value: null, cost: null, isExpanded: false, isLoading: false },  
           ],  
         },  
         {  

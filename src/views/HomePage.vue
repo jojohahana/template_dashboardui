@@ -12,11 +12,11 @@
     <div v-else>  
       <div class="grid grid-cols-1 gap-4 mb-6 sm:grid-cols-2 lg:grid-cols-3">  
         <div class="relative">  
-          <div class="absolute top-0 left-0 w-12 h-12 bg-green-400 rounded-full opacity-75 animate-ping"></div>  
+          <div class="absolute top-0 left-0 w-12 h-12 bg-blue-900 rounded-full opacity-75 animate-ping"></div>  
           <ConsumptionBox  
             title="Total Energy Consumption (PLN + PLTS)"  
-            :value="301"
-            :valueRupiah="100"
+            :value="totalEnergyConsumption"
+            :valueRupiah="totalEnergyCost"
             iconClass="fas fa-industry"  
             iconColor="bg-blue-500"  
           />  
@@ -59,14 +59,24 @@ export default {
       loading: true,  
       formattedDate: '',  
       consumptionData: {  
-        total_gap_value: null,  
-        total_cost_value: null,  
+        total_gap_value: 0,  
+        total_cost_value: 0,  
       },  
       pltsSummary: {  
-        totalValPlts: null,  
-        totalCostPlts: null,  
+        totalValPlts: 0,  
+        totalCostPlts: 0,  
       },  
     };  
+  },  
+  computed: {  
+    // Sum of PLN and PLTS values for total energy consumption
+    totalEnergyConsumption() {  
+      return (Number(this.consumptionData.total_gap_value) || 0) + (Number(this.pltsSummary.totalValPlts) || 0);  
+    },  
+    // Sum of PLN and PLTS costs for total energy cost
+    totalEnergyCost() {  
+      return (Number(this.consumptionData.total_cost_value) || 0) + (Number(this.pltsSummary.totalCostPlts) || 0);  
+    }  
   },  
   methods: {  
     formatDate() {  
@@ -96,14 +106,8 @@ export default {
         const cleanedDataString = response.data.replace(/<!--|-->/g, '').trim();  
         const cleanedData = JSON.parse(cleanedDataString);  
 
-        // Correctly sum up total consumption in Watts
         const totalKWh = cleanedData.reduce((sum, device) => sum + (Number(device.totalConsumption) || 0), 0);  
-        
-        // Ensure conversion to kWh is correct
-        // const totalKWh = totalWatts / 1000;  
-
-        // Store values
-        this.pltsSummary.totalValPlts = totalKWh.toFixed(2);  // Convert to 2 decimal places
+        this.pltsSummary.totalValPlts = totalKWh.toFixed(2);  
         this.pltsSummary.totalCostPlts = Math.ceil(totalKWh * 1035.78).toFixed(2);  
 
       } catch (error) {  
@@ -113,38 +117,12 @@ export default {
       } finally {  
         this.loading = false;  
       }  
-    },
-
-
-  
-    // async fetchPLTSSummary() {  
-    //   try {  
-    //     const response = await axios.post('https://eu1-developer.deyecloud.com/v1.0', {  
-    //       // Include any necessary parameters here  
-    //     });  
-          
-    //     const cleanedDataString = response.data.replace(/<!--|-->/g, '').trim();  
-    //     const cleanedData = JSON.parse(cleanedDataString);  
-  
-    //     // Assuming cleanedData is an array of devices  
-    //     this.pltsSummary.totalConsumption = cleanedData.reduce((sum, device) => {  
-    //       return sum + (device.totalConsumption || 0);  
-    //     }, 0);  
-  
-    //     this.pltsSummary.totalCost = cleanedData.reduce((sum, device) => {  
-    //       return sum + (device.totalCost || 0);  
-    //     }, 0);  
-    //   } catch (error) {  
-    //     console.error('Error fetching PLTS summary:', error);  
-    //     this.pltsSummary.totalConsumption = 0;  
-    //     this.pltsSummary.totalCost = 0;  
-    //   }  
-    // }  
+    }  
   },  
   mounted() {  
     this.formatDate();  
     this.fetchConsumptionEnergy();  
-    this.fetchPLTSSummary(); // Call the new method to fetch PLTS summary  
+    this.fetchPLTSSummary();  
   }  
 };  
 </script>  
@@ -157,11 +135,7 @@ export default {
 }  
   
 @keyframes spin {  
-  0% {  
-    transform: rotate(0deg);  
-  }  
-  100% {  
-    transform: rotate(360deg);  
-  }  
+  0% { transform: rotate(0deg); }  
+  100% { transform: rotate(360deg); }  
 }  
 </style>  
