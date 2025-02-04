@@ -30,7 +30,8 @@
         />  
         <ConsumptionBox   
           title="PLTS"   
-          :value="pltsSummary.totalValPlts"   
+          :value="pltsSummary.totalValPlts"
+          :valueRupiah="pltsSummary.totalCostPlts"    
           iconClass="fas fa-solar-panel"   
           iconColor="bg-yellow-500"   
         />  
@@ -87,26 +88,27 @@ export default {
         this.loading = false;  
       }  
     },  
-    async fetchPLTSSummary() {
-    try {
-      const response = await axios.post('http://127.0.0.1:8000/api/device/detailhistory');
-      const cleanedDataString = response.data.replace(/<!--|-->/g, '').trim();
-      const cleanedData = JSON.parse(cleanedDataString);
+    async fetchPLTSSummary() {  
+    try {  
+      const response = await axios.post('http://127.0.0.1:8000/api/device/detailhistory');  
+      const cleanedDataString = response.data.replace(/<!--|-->/g, '').trim();  
+      const cleanedData = JSON.parse(cleanedDataString);  
 
-      // Summing up totalConsumption values
-      const totalConsumption = cleanedData.reduce((sum, device) => {
-        return sum + parseInt(device.totalConsumption || 0);
-      }, 0);
+      // Sum total consumption
+      this.pltsSummary.totalValPlts = cleanedData.reduce((sum, device) => sum + (Number(device.totalConsumption) || 0), 0);  
+      
+      // Calculate cost in Rupiah
+      this.pltsSummary.totalCostPlts = (this.pltsSummary.totalValPlts * 1035.78).toFixed(2);  
 
-      this.pltsSummary.totalValPlts = totalConsumption; // Assigning summed value
-
-    } catch (error) {
-      console.error('Error fetching PLTS summary:', error);
-      this.pltsSummary.totalValPlts = 0;
-    } finally {
-      this.loading = false;
-    }
+    } catch (error) {  
+      console.error('Error fetching PLTS summary:', error);  
+      this.pltsSummary.totalValPlts = 0;  
+      this.pltsSummary.totalCostPlts = 0;  
+    } finally {  
+      this.loading = false;  
+    }  
   },
+
   
     // async fetchPLTSSummary() {  
     //   try {  
