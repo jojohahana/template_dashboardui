@@ -14,20 +14,22 @@
         <div class="relative">  
           <div class="absolute top-0 left-0 w-12 h-12 bg-green-400 rounded-full opacity-75 animate-ping"></div>  
           <ConsumptionBox  
-            title="PLN"  
-            :value="consumptionData.total_gap_value"  
-            :valueRupiah="consumptionData.total_cost_value"  
-            iconClass="fas fa-bolt-lightning"  
+            title="Total Energy Consumption (PLN + PLTS)"  
+            :value="301"
+            :valueRupiah="100"
+            iconClass="fas fa-industry"  
             iconColor="bg-blue-500"  
           />  
         </div>  
   
         <ConsumptionBox   
-          title="Consumption Energy"   
-          :value="301"   
-          iconClass="fas fa-industry"   
+          title="PLN"   
+          :value="consumptionData.total_gap_value"  
+          :valueRupiah="consumptionData.total_cost_value"  
+          iconClass="fas fa-bolt-lightning"   
           iconColor="bg-green-800"   
-        />  
+        />
+          
         <ConsumptionBox   
           title="PLTS"   
           :value="pltsSummary.totalValPlts"
@@ -95,10 +97,10 @@ export default {
         const cleanedData = JSON.parse(cleanedDataString);  
 
         // Correctly sum up total consumption in Watts
-        const totalWatts = cleanedData.reduce((sum, device) => sum + (Number(device.totalConsumption) || 0), 0);  
+        const totalKWh = cleanedData.reduce((sum, device) => sum + (Number(device.totalConsumption) || 0), 0);  
         
         // Ensure conversion to kWh is correct
-        const totalKWh = totalWatts / 1000;  
+        // const totalKWh = totalWatts / 1000;  
 
         // Store values
         this.pltsSummary.totalValPlts = totalKWh.toFixed(2);  // Convert to 2 decimal places

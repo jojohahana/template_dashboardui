@@ -85,7 +85,7 @@ export default {
           ],  
         },  
         {  
-          title: "BOILER",  
+          title: "PANEL BOILER",  
           api: "http://127.0.0.1:8000/api/boiler",  
           color: "#4CA9CB",  
           iconClass: "fas fa-biohazard",  

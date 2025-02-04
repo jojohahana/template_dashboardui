@@ -1,6 +1,6 @@
 <template>
   <div class="p-6 mb-6 bg-white rounded-lg shadow">
-    <h3 class="mb-4 text-lg font-semibold">Daily Energy Consumption</h3>
+    <h3 class="mb-4 text-lg font-semibold">Daily Energy Consumption - PLN (kWh)</h3>
     <div class="flex flex-col gap-4 md:flex-row">
       <!-- Bar Chart -->
       <div class="flex-1 p-8 bg-blue-100 rounded-lg">
