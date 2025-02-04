@@ -14,23 +14,23 @@
         <div class="relative">  
           <div class="absolute top-0 left-0 w-12 h-12 bg-green-400 rounded-full opacity-75 animate-ping"></div>  
           <ConsumptionBox  
-            title="Consumption Energy"  
+            title="PLN"  
             :value="consumptionData.total_gap_value"  
             :valueRupiah="consumptionData.total_cost_value"  
-            iconClass="fas fa-industry"  
-            iconColor="bg-green-500"  
+            iconClass="fas fa-bolt-lightning"  
+            iconColor="bg-blue-500"  
           />  
         </div>  
   
         <ConsumptionBox   
-          title="PLN"   
+          title="Consumption Energy"   
           :value="301"   
-          iconClass="fas fa-bolt-lightning"   
-          iconColor="bg-blue-800"   
+          iconClass="fas fa-industry"   
+          iconColor="bg-green-800"   
         />  
         <ConsumptionBox   
           title="PLTS"   
-          :value="pltsSummary.totalConsumption"   
+          :value="pltsSummary.totalValPlts"   
           iconClass="fas fa-solar-panel"   
           iconColor="bg-yellow-500"   
         />  
@@ -60,8 +60,8 @@ export default {
         total_cost_value: null,  
       },  
       pltsSummary: {  
-        totalConsumption: 0,  
-        totalCost: 0,  
+        totalValPlts: null,  
+        totalCostPlts: null,  
       },  
     };  
   },  
@@ -87,29 +87,50 @@ export default {
         this.loading = false;  
       }  
     },  
-    async fetchPLTSSummary() {  
-      try {  
-        const response = await axios.post('https://eu1-developer.deyecloud.com/v1.0', {  
-          // Include any necessary parameters here  
-        });  
+    async fetchPLTSSummary() {
+    try {
+      const response = await axios.post('http://127.0.0.1:8000/api/device/detailhistory');
+      const cleanedDataString = response.data.replace(/<!--|-->/g, '').trim();
+      const cleanedData = JSON.parse(cleanedDataString);
+
+      // Summing up totalConsumption values
+      const totalConsumption = cleanedData.reduce((sum, device) => {
+        return sum + parseInt(device.totalConsumption || 0);
+      }, 0);
+
+      this.pltsSummary.totalValPlts = totalConsumption; // Assigning summed value
+
+    } catch (error) {
+      console.error('Error fetching PLTS summary:', error);
+      this.pltsSummary.totalValPlts = 0;
+    } finally {
+      this.loading = false;
+    }
+  },
+  
+    // async fetchPLTSSummary() {  
+    //   try {  
+    //     const response = await axios.post('https://eu1-developer.deyecloud.com/v1.0', {  
+    //       // Include any necessary parameters here  
+    //     });  
           
-        const cleanedDataString = response.data.replace(/<!--|-->/g, '').trim();  
-        const cleanedData = JSON.parse(cleanedDataString);  
+    //     const cleanedDataString = response.data.replace(/<!--|-->/g, '').trim();  
+    //     const cleanedData = JSON.parse(cleanedDataString);  
   
-        // Assuming cleanedData is an array of devices  
-        this.pltsSummary.totalConsumption = cleanedData.reduce((sum, device) => {  
-          return sum + (device.totalConsumption || 0);  
-        }, 0);  
+    //     // Assuming cleanedData is an array of devices  
+    //     this.pltsSummary.totalConsumption = cleanedData.reduce((sum, device) => {  
+    //       return sum + (device.totalConsumption || 0);  
+    //     }, 0);  
   
-        this.pltsSummary.totalCost = cleanedData.reduce((sum, device) => {  
-          return sum + (device.totalCost || 0);  
-        }, 0);  
-      } catch (error) {  
-        console.error('Error fetching PLTS summary:', error);  
-        this.pltsSummary.totalConsumption = 0;  
-        this.pltsSummary.totalCost = 0;  
-      }  
-    }  
+    //     this.pltsSummary.totalCost = cleanedData.reduce((sum, device) => {  
+    //       return sum + (device.totalCost || 0);  
+    //     }, 0);  
+    //   } catch (error) {  
+    //     console.error('Error fetching PLTS summary:', error);  
+    //     this.pltsSummary.totalConsumption = 0;  
+    //     this.pltsSummary.totalCost = 0;  
+    //   }  
+    // }  
   },  
   mounted() {  
     this.formatDate();  
