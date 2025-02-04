@@ -89,25 +89,30 @@ export default {
       }  
     },  
     async fetchPLTSSummary() {  
-    try {  
-      const response = await axios.post('http://127.0.0.1:8000/api/device/detailhistory');  
-      const cleanedDataString = response.data.replace(/<!--|-->/g, '').trim();  
-      const cleanedData = JSON.parse(cleanedDataString);  
+      try {  
+        const response = await axios.post('http://127.0.0.1:8000/api/device/detailhistory');  
+        const cleanedDataString = response.data.replace(/<!--|-->/g, '').trim();  
+        const cleanedData = JSON.parse(cleanedDataString);  
 
-      // Sum total consumption
-      this.pltsSummary.totalValPlts = cleanedData.reduce((sum, device) => sum + (Number(device.totalConsumption) || 0), 0);  
-      
-      // Calculate cost in Rupiah
-      this.pltsSummary.totalCostPlts = (this.pltsSummary.totalValPlts * 1035.78).toFixed(2);  
+        // Correctly sum up total consumption in Watts
+        const totalWatts = cleanedData.reduce((sum, device) => sum + (Number(device.totalConsumption) || 0), 0);  
+        
+        // Ensure conversion to kWh is correct
+        const totalKWh = totalWatts / 1000;  
 
-    } catch (error) {  
-      console.error('Error fetching PLTS summary:', error);  
-      this.pltsSummary.totalValPlts = 0;  
-      this.pltsSummary.totalCostPlts = 0;  
-    } finally {  
-      this.loading = false;  
-    }  
-  },
+        // Store values
+        this.pltsSummary.totalValPlts = totalKWh.toFixed(2);  // Convert to 2 decimal places
+        this.pltsSummary.totalCostPlts = Math.ceil(totalKWh * 1035.78).toFixed(2);  
+
+      } catch (error) {  
+        console.error('Error fetching PLTS summary:', error);  
+        this.pltsSummary.totalValPlts = 0;  
+        this.pltsSummary.totalCostPlts = 0;  
+      } finally {  
+        this.loading = false;  
+      }  
+    },
+
 
   
     // async fetchPLTSSummary() {  
