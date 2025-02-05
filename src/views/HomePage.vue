@@ -12,7 +12,7 @@
     <div v-else>  
       <div class="grid grid-cols-1 gap-4 mb-6 sm:grid-cols-2 lg:grid-cols-3">  
         <div class="relative">  
-          <div class="absolute top-0 left-0 w-12 h-12 bg-green-400 rounded-full opacity-75 animate-ping"></div>  
+          <div class="absolute top-0 left-0 w-12 h-12 bg-blue-800 rounded-full opacity-75 animate-ping"></div>  
           <ConsumptionBox  
             title="Total Energy Consumption (PLN + PLTS)"  
             :value="totalEnergyConsumption"

@@ -126,7 +126,7 @@ export default {
           datasets: [
             {
               label: 'Energy Distribution',
-              backgroundColor: ['#42A5F5', '#FFD700'],
+              backgroundColor: ['#1AA85B', '#FFD700'],
               data: [props.plnValue, props.pltsValue],
             },
           ],
