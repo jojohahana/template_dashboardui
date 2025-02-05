@@ -12,7 +12,7 @@
     <div v-else>  
       <div class="grid grid-cols-1 gap-4 mb-6 sm:grid-cols-2 lg:grid-cols-3">  
         <div class="relative">  
-          <div class="absolute top-0 left-0 w-12 h-12 bg-blue-900 rounded-full opacity-75 animate-ping"></div>  
+          <div class="absolute top-0 left-0 w-12 h-12 bg-green-400 rounded-full opacity-75 animate-ping"></div>  
           <ConsumptionBox  
             title="Total Energy Consumption (PLN + PLTS)"  
             :value="totalEnergyConsumption"
@@ -39,7 +39,12 @@
         />  
       </div>  
   
-      <EnergyChart />  
+      <EnergyChart 
+        :plnValue="consumptionData.total_gap_value"
+        :plnValueRupiah="consumptionData.total_cost_value"
+        :pltsValue="pltsSummary.totalValPlts"
+        :pltsValueRupiah="pltsSummary.totalCostPlts"
+      />
     </div>  
   </div>  
 </template>  
@@ -107,7 +112,7 @@ export default {
         const cleanedData = JSON.parse(cleanedDataString);  
 
         const totalKWh = cleanedData.reduce((sum, device) => sum + (Number(device.totalConsumption) || 0), 0);  
-        this.pltsSummary.totalValPlts = totalKWh.toFixed(2);  
+        this.pltsSummary.totalValPlts = totalKWh;  
         this.pltsSummary.totalCostPlts = Math.ceil(totalKWh * 1035.78).toFixed(2);  
 
       } catch (error) {  

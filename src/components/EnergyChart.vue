@@ -15,29 +15,35 @@
 </template>
 
 <script>
-import { ref, onMounted, onBeforeUnmount } from 'vue';
-import { Chart, BarController, BarElement, DoughnutController, CategoryScale, LinearScale, Title, Legend, ArcElement } from 'chart.js';
+import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
+import { Chart, BarController, BarElement, DoughnutController, CategoryScale, LinearScale, Title, Legend, ArcElement, Tooltip } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import axios from 'axios';
 
-Chart.register(BarController, BarElement, DoughnutController, CategoryScale, LinearScale, Title, Legend, ArcElement, ChartDataLabels);
+Chart.register(BarController, BarElement, DoughnutController, CategoryScale, LinearScale, Title, Legend, ArcElement, Tooltip, ChartDataLabels);
 
 export default {
-  setup() {
+  props: {
+    plnValue: Number,
+    plnValueRupiah: Number,
+    pltsValue: Number,
+    pltsValueRupiah: Number,
+  },
+  setup(props) {
     const barChart = ref(null);
     const doughnutChart = ref(null);
     let barChartInstance = null;
     let doughnutChartInstance = null;
 
+    // Fetch Chart Data for Bar Chart
     const fetchChartData = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/api/getdaily');
-
-        const jsonDataString = response.data.replace(/<!--|-->/g, '');
-        const apiData = JSON.parse(jsonDataString);
+        const response = await fetch('http://127.0.0.1:8000/api/getdaily');
+        const jsonDataString = await response.text();
+        const cleanedDataString = jsonDataString.replace(/<!--|-->/g, '');
+        const apiData = JSON.parse(cleanedDataString);
 
         if (!Array.isArray(apiData)) {
-          console.error("Parsed API data is not an array or is empty.");
+          console.error("Parsed API data is not an array.");
           return;
         }
 
@@ -45,12 +51,13 @@ export default {
         const data = apiData.map(item => item.total_gap_value);
 
         renderBarChart(labels, data);
-        renderDoughnutChart(data);
+        renderDoughnutChart(); // Ensure Doughnut Chart updates with PLN & PLTS values
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
+    // Bar Chart
     const renderBarChart = (labels, data) => {
       if (barChartInstance) {
         barChartInstance.destroy();
@@ -88,7 +95,7 @@ export default {
                 weight: 'bold',
               },
               formatter: function (value) {
-                return (value / 1000).toFixed(3); // Divide by 1000 and format with three decimal places
+                return (value / 1000).toFixed(3); // Convert to kWh and format
               },
             },
           },
@@ -101,24 +108,26 @@ export default {
       });
     };
 
-    const renderDoughnutChart = (data) => {
+    // Doughnut Chart
+    const renderDoughnutChart = () => {
       if (doughnutChartInstance) {
         doughnutChartInstance.destroy();
       }
 
+      // Convert PLN & PLTS values to percentages
+      const totalConsumption = (props.plnValue || 0) + (props.pltsValue || 0);
+      const plnPercentage = totalConsumption > 0 ? ((props.plnValue / totalConsumption) * 100).toFixed(1) : 0;
+      const pltsPercentage = totalConsumption > 0 ? ((props.pltsValue / totalConsumption) * 100).toFixed(1) : 0;
+
       doughnutChartInstance = new Chart(doughnutChart.value, {
         type: 'doughnut',
         data: {
-          labels: ['High Consumption', 'Medium Consumption', 'Low Consumption'],
+          labels: [`PLN (${plnPercentage}%)`, `PLTS (${pltsPercentage}%)`],
           datasets: [
             {
               label: 'Energy Distribution',
-              backgroundColor: ['#42A5F5', '#66BB6A', '#FFA726'],
-              data: [
-                data.filter((value) => value > 15000).reduce((sum, value) => sum + value, 0),
-                data.filter((value) => value > 5000 && value <= 15000).reduce((sum, value) => sum + value, 0),
-                data.filter((value) => value <= 5000).reduce((sum, value) => sum + value, 0),
-              ],
+              backgroundColor: ['#42A5F5', '#FFD700'],
+              data: [props.plnValue, props.pltsValue],
             },
           ],
         },
@@ -130,22 +139,29 @@ export default {
               display: true,
               position: 'bottom',
             },
+            datalabels: {
+              color: '#fff',
+              formatter: (value, ctx) => {
+                const total = ctx.dataset.data.reduce((sum, val) => sum + val, 0);
+                return total > 0 ? ((value / total) * 100).toFixed(1) + '%' : '0%';
+              },
+            },
           },
         },
       });
     };
 
+    // Watch for changes in PLN & PLTS values to update the Doughnut Chart dynamically
+    watch(() => [props.plnValue, props.pltsValue], renderDoughnutChart);
+
     onMounted(() => {
       fetchChartData();
+      renderDoughnutChart();
     });
 
     onBeforeUnmount(() => {
-      if (barChartInstance) {
-        barChartInstance.destroy();
-      }
-      if (doughnutChartInstance) {
-        doughnutChartInstance.destroy();
-      }
+      if (barChartInstance) barChartInstance.destroy();
+      if (doughnutChartInstance) doughnutChartInstance.destroy();
     });
 
     return {
