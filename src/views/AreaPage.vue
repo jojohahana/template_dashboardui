@@ -48,17 +48,17 @@ export default {
           ],  
         },  
         {  
-          title: "INJECTION",  
+          title: "PANEL INJECTION",  
           api: "http://127.0.0.1:8000/api/injectttl",  
           color: "#49958C",  
           iconClass: "fas fa-syringe",  
           value: null,  
           valueRupiah: null,  
           details: [  
-            { name: "Injection 1", api: "http://127.0.0.1:8000/api/injectone", value: null, cost: null, isExpanded: false, isLoading: false },  
-            { name: "Injection 2", api: "http://127.0.0.1:8000/api/injecttwo", value: null, cost: null, isExpanded: false, isLoading: false },  
-            { name: "Injection 3", api: "http://127.0.0.1:8000/api/injectthree", value: null, cost: null, isExpanded: false, isLoading: false },  
-            { name: "Injection 4", api: "http://127.0.0.1:8000/api/injectfour", value: null, cost: null, isExpanded: false, isLoading: false },  
+            { name: "Panel Injection 1", api: "http://127.0.0.1:8000/api/injectone", value: null, cost: null, isExpanded: false, isLoading: false },  
+            { name: "Panel Injection 2", api: "http://127.0.0.1:8000/api/injecttwo", value: null, cost: null, isExpanded: false, isLoading: false },  
+            { name: "Panel Injection 3", api: "http://127.0.0.1:8000/api/injectthree", value: null, cost: null, isExpanded: false, isLoading: false },  
+            { name: "Panel Injection 4", api: "http://127.0.0.1:8000/api/injectfour", value: null, cost: null, isExpanded: false, isLoading: false },  
           ],  
         },  
         {  
@@ -69,9 +69,9 @@ export default {
           value: null,  
           valueRupiah: null,  
           details: [  
-            { name: "Compressor 1", api: "http://127.0.0.1:8000/api/compresone", value: null, cost: null, isExpanded: false, isLoading: false },  
-            { name: "Compressor 2", api: "http://127.0.0.1:8000/api/comprestwo", value: null, cost: null, isExpanded: false, isLoading: false },  
-            { name: "Compressor 3", api: "http://127.0.0.1:8000/api/compresthree", value: null, cost: null, isExpanded: false, isLoading: false },  
+            { name: "Compressor 1 & 2", api: "http://127.0.0.1:8000/api/compresone", value: null, cost: null, isExpanded: false, isLoading: false },  
+            { name: "Compressor 3", api: "http://127.0.0.1:8000/api/comprestwo", value: null, cost: null, isExpanded: false, isLoading: false },  
+            { name: "Compressor 4 & 5", api: "http://127.0.0.1:8000/api/compresthree", value: null, cost: null, isExpanded: false, isLoading: false },  
           ],  
         },  
         {  
@@ -82,8 +82,8 @@ export default {
           value: null,  
           valueRupiah: null,  
           details: [  
-            { name: "Compressor 1", api: "http://127.0.0.1:8000/api/lvmdpone", value: null, cost: null, isExpanded: false, isLoading: false },  
-            { name: "Compressor 2", api: "http://127.0.0.1:8000/api/lvmdptwo", value: null, cost: null, isExpanded: false, isLoading: false },  
+            { name: "LVMDP 1", api: "http://127.0.0.1:8000/api/lvmdpone", value: null, cost: null, isExpanded: false, isLoading: false },  
+            { name: "LVMDP 2", api: "http://127.0.0.1:8000/api/lvmdptwo", value: null, cost: null, isExpanded: false, isLoading: false },  
           ],  
         },  
         {  

@@ -5,7 +5,7 @@
         <div class="flex lg:flex-1">
           <router-link to="/" class="-m-1.5 p-1.5">
             <span class="sr-only">Your Company</span>
-            <img class="w-auto h-12" src="../public/ojilogo-removebg-preview.png" alt="" />
+            <img class="w-auto h-12" src="../public/Oji-logo -tagline.png" alt="" />
           </router-link>
         </div>
         <div class="flex lg:hidden">
@@ -15,13 +15,13 @@
           </button>
         </div>
         <PopoverGroup class="hidden lg:flex lg:gap-x-12">
-          <router-link to="/" class="text-sm font-semibold leading-6 text-gray-900 nav-link">Home</router-link>
-          <router-link to="/area" class="text-sm font-semibold leading-6 text-gray-900 nav-link">Energy Area</router-link>
+          <router-link to="/" class="font-semibold leading-6 text-gray-900 text-md nav-link">Home</router-link>
+          <router-link to="/area" class="font-semibold leading-6 text-gray-900 text-md nav-link">Energy Area</router-link>
           <!-- <router-link to="/widget" class="text-sm font-semibold leading-6 text-gray-900 nav-link">Widget</router-link>
           <router-link to="/charts" class="text-sm font-semibold leading-6 text-gray-900 nav-link">Charts</router-link> -->
           <!-- Start Multiple Navbar Child Menu Desktop View -->
           <!-- ==Production Button Dropdown Menu==  -->
-          <Popover class="relative">
+          <!-- <Popover class="relative">
             <PopoverButton class="flex items-center text-sm font-semibold leading-6 text-gray-900 gap-x-1 hover:text-white">
               Product
               <ChevronDownIcon class="flex-none w-5 h-5 text-gray-900" aria-hidden="true" />
@@ -50,13 +50,13 @@
                 </div>
               </PopoverPanel>
             </transition>
-          </Popover>
+          </Popover> -->
           <!-- End Multiple Navbar Child Menu Desktop View -->
         </PopoverGroup>
 
-        <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+        <!-- <div class="hidden lg:flex lg:flex-1 lg:justify-end">
           <router-link to="/login" class="text-sm font-semibold leading-6 text-gray-900 nav-link">Log Out <span aria-hidden="true">&rarr;</span></router-link>
-        </div>
+        </div> -->
       </nav>
       <Dialog class="lg:hidden" @close="mobileMenuOpen = false" :open="mobileMenuOpen">
         <div class="fixed inset-0 z-10" />
@@ -90,9 +90,9 @@
                 <router-link to="/widget" class="block px-3 py-2 -mx-3 text-base font-semibold leading-7 text-gray-900 rounded-lg hover:bg-gray-50">Widget</router-link>
                 <router-link to="/company" class="block px-3 py-2 -mx-3 text-base font-semibold leading-7 text-gray-900 rounded-lg hover:bg-gray-50">Charts</router-link>
               </div>
-              <div class="py-6">
+              <!-- <div class="py-6">
                 <router-link to="/login" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Log Out</router-link>
-              </div>
+              </div> -->
             </div>
           </div>
         </DialogPanel>
@@ -112,11 +112,11 @@ import {
   Disclosure,
   DisclosureButton,
   DisclosurePanel,
-  Popover,
+  // Popover,
   // !! PopoverButton for Colapse Navbar Desktop View !! 
-  PopoverButton,
-  PopoverGroup,
-  PopoverPanel,
+  // PopoverButton,
+  // PopoverGroup,
+  // PopoverPanel,
 } from '@headlessui/vue'
 import {
   // ArrowPathIcon,
