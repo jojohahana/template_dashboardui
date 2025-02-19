@@ -25,7 +25,7 @@ export default {
   },
   computed: {
     formattedValue() {
-      return new Intl.NumberFormat('en-US', {
+      return new Intl.NumberFormat('id-ID', {
         minimumFractionDigits: 0,
         maximumFractionDigits: 0
       }).format(this.value);

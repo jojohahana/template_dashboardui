@@ -164,14 +164,12 @@ export default {
   },  
   methods: {  
     async fetchAllData() {  
-      // Fetch data for all main sections  
       const promises = this.rowData.map((item, index) => this.fetchDataForSection(item.api, index));  
       await Promise.all(promises);  
     },  
     async fetchDataForSection(apiUrl, index) {  
       try {  
         const response = await axios.get(apiUrl);  
-        // Clean the response by removing HTML comment tags  
         const cleanedDataString = response.data.replace(/<!--|-->/g, '').trim();  
         const data = JSON.parse(cleanedDataString); // Parse the cleaned string  
       
@@ -181,6 +179,8 @@ export default {
       
         this.rowData[index].value = new Intl.NumberFormat('id-ID').format(totalConsumption); // Assign to the main section value  
         this.rowData[index].valueRupiah = totalCost; // Assign to the main section valueRupiah  
+
+        
       } catch (error) {  
         console.error(`Error fetching data from ${apiUrl}:`, error);  
         this.rowData[index].value = "N/A";   
