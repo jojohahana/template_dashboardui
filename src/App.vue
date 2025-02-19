@@ -5,7 +5,7 @@
         <div class="flex lg:flex-1">
           <router-link to="/" class="-m-1.5 p-1.5">
             <span class="sr-only">Your Company</span>
-            <img class="w-auto h-12" src="../public/Oji-logo -tagline.png" alt="" />
+            <img class="w-auto h-20 max-w-full " src="../public/Oji-logo -tagline.png" alt="" />
           </router-link>
         </div>
         <div class="flex lg:hidden">
@@ -15,10 +15,8 @@
           </button>
         </div>
         <PopoverGroup class="hidden lg:flex lg:gap-x-12">
-          <router-link to="/" class="font-semibold leading-6 text-gray-900 text-md nav-link">Home</router-link>
-          <router-link to="/area" class="font-semibold leading-6 text-gray-900 text-md nav-link">Energy Area</router-link>
-          <!-- <router-link to="/widget" class="text-sm font-semibold leading-6 text-gray-900 nav-link">Widget</router-link>
-          <router-link to="/charts" class="text-sm font-semibold leading-6 text-gray-900 nav-link">Charts</router-link> -->
+          <router-link to="/" class="text-lg font-semibold leading-6 text-gray-900 md:text-xl nav-link">Home</router-link>
+          <router-link to="/area" class="text-lg font-semibold leading-6 text-gray-900 md:text-xl nav-link">Energy Area</router-link>
           <!-- Start Multiple Navbar Child Menu Desktop View -->
           <!-- ==Production Button Dropdown Menu==  -->
           <!-- <Popover class="relative">
@@ -86,9 +84,9 @@
                 </Disclosure>
                 <!-- End Sub Navbar Mobile View  -->
                 <router-link to="/" class="block px-3 py-2 -mx-3 text-base font-semibold leading-7 text-gray-900 rounded-lg hover:bg-gray-50">Home</router-link>
-                <router-link to="/widget" class="block px-3 py-2 -mx-3 text-base font-semibold leading-7 text-gray-900 rounded-lg hover:bg-gray-50">Energy Area</router-link>
-                <router-link to="/widget" class="block px-3 py-2 -mx-3 text-base font-semibold leading-7 text-gray-900 rounded-lg hover:bg-gray-50">Widget</router-link>
-                <router-link to="/company" class="block px-3 py-2 -mx-3 text-base font-semibold leading-7 text-gray-900 rounded-lg hover:bg-gray-50">Charts</router-link>
+                <router-link to="/area" class="block px-3 py-2 -mx-3 text-base font-semibold leading-7 text-gray-900 rounded-lg hover:bg-gray-50">Energy Area</router-link>
+                <!-- <router-link to="/widget" class="block px-3 py-2 -mx-3 text-base font-semibold leading-7 text-gray-900 rounded-lg hover:bg-gray-50">Widget</router-link>
+                <router-link to="/company" class="block px-3 py-2 -mx-3 text-base font-semibold leading-7 text-gray-900 rounded-lg hover:bg-gray-50">Charts</router-link> -->
               </div>
               <!-- <div class="py-6">
                 <router-link to="/login" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Log Out</router-link>

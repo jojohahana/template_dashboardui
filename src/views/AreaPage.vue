@@ -156,7 +156,7 @@ export default {
         },  
       ],  
       collapsedIndex: null,  
-      selectedDetail: null, // Tracks the currently selected detail  
+      selectedDetail: null,  
     };  
   },  
   mounted() {  
@@ -179,12 +179,12 @@ export default {
         const totalConsumption = data[key]?.total_gap_value ?? 0; // Extract total_gap_value  
         const totalCost = data[key]?.total_cost_value ?? 0; // Extract total_cost_value  
       
-        this.rowData[index].value = totalConsumption; // Assign to the main section value  
+        this.rowData[index].value = new Intl.NumberFormat('id-ID').format(totalConsumption); // Assign to the main section value  
         this.rowData[index].valueRupiah = totalCost; // Assign to the main section valueRupiah  
       } catch (error) {  
         console.error(`Error fetching data from ${apiUrl}:`, error);  
-        this.rowData[index].value = "N/A"; // Set to N/A on error  
-        this.rowData[index].valueRupiah = "N/A"; // Set to N/A on error  
+        this.rowData[index].value = "N/A";   
+        this.rowData[index].valueRupiah = "N/A"; 
       }  
     },  
     toggleCollapse(index) {  

@@ -48,16 +48,4 @@ const router = createRouter({
   routes
 })
 
-
-//CSRF Token Default Header for Axios
-// const token = document.head.querySelector('meta[name="csrf-token"]');
-// if (token) {
-//     axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
-// } else {
-//     console.error('CSRF token not found');
-// }
-
-// Axios Setup
-// axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
 export default router
