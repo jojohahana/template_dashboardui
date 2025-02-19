@@ -20,8 +20,8 @@ export default {
     title: { type: String, required: true },
     iconClass: { type: String, required: true },
     iconColor: { type: String, required: true },
-    value: { type: Number, required: true, default: 0 },
-    valueRupiah: { type: Number, required: true }
+    value: { type: [Number, String], required: true, default: 0 },
+    valueRupiah: { type: [Number,String], required: true }
   },
   computed: {
     formattedValue() {

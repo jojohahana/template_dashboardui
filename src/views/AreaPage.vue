@@ -86,28 +86,30 @@ export default {
             { name: "LVMDP 2", api: "http://127.0.0.1:8000/api/lvmdptwo", value: null, cost: null, isExpanded: false, isLoading: false },  
           ],  
         },  
-        {  
-          title: "PANEL BOILER",  
-          api: "http://127.0.0.1:8000/api/boiler",  
-          color: "#4CA9CB",  
-          iconClass: "fas fa-biohazard",  
-          value: null,  
-          valueRupiah: null,  
-          details: [  
-            { name: "Boiler", api: "http://127.0.0.1:8000/api/boiler", value: null, cost: null, isExpanded: false, isLoading: false },   
-          ],  
-        },  
-        {  
-          title: "CUBICAL",  
-          api: "http://127.0.0.1:8000/api/cubical",  
-          color: "#49958C",  
-          iconClass: "fas fa-flask-vial",  
-          value: null,  
-          valueRupiah: null,  
-          details: [  
-            { name: "Cubical", api: "http://127.0.0.1:8000/api/cubical", value: null, cost: null, isExpanded: false, isLoading: false },   
-          ],  
-        },  
+        // CUBICAL NOT ACTIVE REQ BASED ON MEETING 14 FEB 2025 
+        // {  
+        //   title: "PANEL BOILER",  
+        //   api: "http://127.0.0.1:8000/api/boiler",  
+        //   color: "#4CA9CB",  
+        //   iconClass: "fas fa-biohazard",  
+        //   value: null,  
+        //   valueRupiah: null,  
+        //   details: [  
+        //     { name: "Boiler", api: "http://127.0.0.1:8000/api/boiler", value: null, cost: null, isExpanded: false, isLoading: false },   
+        //   ],  
+        // }, 
+        // CUBICAL NOT ACTIVE REQ BASED ON MEETING 14 FEB 2025 
+        // {  
+        //   title: "CUBICAL",  
+        //   api: "http://127.0.0.1:8000/api/cubical",  
+        //   color: "#49958C",  
+        //   iconClass: "fas fa-flask-vial",  
+        //   value: null,  
+        //   valueRupiah: null,  
+        //   details: [  
+        //     { name: "Cubical", api: "http://127.0.0.1:8000/api/cubical", value: null, cost: null, isExpanded: false, isLoading: false },   
+        //   ],  
+        // },  
         {  
           title: "EBEAM",  
           api: "http://127.0.0.1:8000/api/ebeam",  
@@ -139,6 +141,17 @@ export default {
           valueRupiah: null,  
           details: [  
             { name: "Numedik", api: "http://127.0.0.1:8000/api/numedik", value: null, cost: null, isExpanded: false, isLoading: false },   
+          ],  
+        },  
+        {  
+          title: "BLOOD BAG",  
+          api: "http://127.0.0.1:8000/api/bb",  
+          color: "#49958C",  
+          iconClass: "fas fa-shield-virus",  
+          value: null,  
+          valueRupiah: null,  
+          details: [  
+            { name: "Blood Bag", api: "http://127.0.0.1:8000/api/bb", value: null, cost: null, isExpanded: false, isLoading: false },   
           ],  
         },  
       ],  
