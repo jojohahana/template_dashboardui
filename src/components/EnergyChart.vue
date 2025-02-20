@@ -18,8 +18,9 @@
 import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
 import { Chart, BarController, BarElement, DoughnutController, CategoryScale, LinearScale, Title, Legend, ArcElement, Tooltip } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import annotationPlugin from 'chartjs-plugin-annotation';
 
-Chart.register(BarController, BarElement, DoughnutController, CategoryScale, LinearScale, Title, Legend, ArcElement, Tooltip, ChartDataLabels);
+Chart.register(BarController, BarElement, DoughnutController, CategoryScale, LinearScale, Title, Legend, ArcElement, Tooltip, ChartDataLabels, annotationPlugin);
 
 export default {
   props: {
@@ -33,6 +34,7 @@ export default {
     const doughnutChart = ref(null);
     let barChartInstance = null;
     let doughnutChartInstance = null;
+    const AVERAGE_VALUE = 30173; // Static Average Value
 
     // Fetch Chart Data for Bar Chart
     const fetchChartData = async () => {
@@ -96,6 +98,33 @@ export default {
               },
               formatter: function (value) {
                 return (value / 1000).toFixed(3); // Convert to kWh and format
+              },
+            },
+            //Add Average Value 
+            annotation: {
+              annotations: {
+                line1: {
+                  type: 'line',
+                  yMin: AVERAGE_VALUE,
+                  yMax: AVERAGE_VALUE,
+                  borderColor: 'red',
+                  borderWidth: 2,
+                  borderDash: [6, 6],
+                  label: {
+                    display: 'auto',
+                    content: `🔴 Avg: ${AVERAGE_VALUE} kWh`,
+                    enabled: true,
+                    position: 'end',
+                    backgroundColor: 'rgba(255, 99, 132, 0.8)',
+                    color: '#fff',
+                    font: {
+                      size: 10,
+                      weight: 'bold',
+                    },
+                    padding: 8,
+                    borderRadius: 5,
+                  },
+                },
               },
             },
           },

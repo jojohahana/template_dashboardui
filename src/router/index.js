@@ -3,49 +3,50 @@ import HomePage from '../views/HomePage.vue'
 import WidgetPage from '../views/WidgetPage.vue'
 import ChartsPage from '../views/ChartsPage.vue'
 import LoginPage from '@/views/LoginPage.vue'
-// import AdminPage from '@/views/AdminPage.vue'
 import AreaPage from '@/views/AreaPage.vue'
-// import { Title } from 'chart.js'
-// import axios from 'axios'
 
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: HomePage,
-    meta: { Title: 'Home Page'},
+    meta: { title: 'Home - Energy Monitoring' }, // ✅ Fix: Use lowercase "title"
   },
-
   {
     path: '/widget',
     name: 'Widget',
-    component: WidgetPage
+    component: WidgetPage,
+    meta: { title: 'Widget - Energy Monitoring' }, // ✅ Add title for other pages
   },
-
   {
     path: '/charts',
     name: 'Charts',
-    component: ChartsPage
+    component: ChartsPage,
+    meta: { title: 'Charts - Energy Monitoring' },
   },
   {
     path: '/login',
     name: 'Login',
-    component: LoginPage
+    component: LoginPage,
+    meta: { title: 'Login - Energy Monitoring' },
   },
-
-
   {
     path: '/area',
     name: 'Area',
-    component: AreaPage
+    component: AreaPage,
+    meta: { title: 'Area - Energy Monitoring' },
   },
-
- 
 ]
 
 const router = createRouter({
   history: createWebHistory(),
   routes
-})
+});
 
-export default router
+// ✅ Fix: Change "Title" to "title" for consistency
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title || "Default Title";
+  next();
+});
+
+export default router;
