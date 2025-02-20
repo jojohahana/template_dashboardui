@@ -147,7 +147,7 @@ export default {
           title: "BLOOD BAG",  
           api: "http://127.0.0.1:8000/api/bb",  
           color: "#49958C",  
-          iconClass: "fas fa-shield-virus",  
+          iconClass: "fas fa-droplet",  
           value: null,  
           valueRupiah: null,  
           details: [  
