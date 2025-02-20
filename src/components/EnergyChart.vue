@@ -34,7 +34,10 @@ export default {
     const doughnutChart = ref(null);
     let barChartInstance = null;
     let doughnutChartInstance = null;
-    const AVERAGE_VALUE = 30173; // Static Average Value
+    // Static Value Dashline on Barchart
+    const AVERAGE_VALUE = 30173; 
+    const WARNING_VALUE = 33935;
+    const ACTION_VALUE = 35835;
 
     // Fetch Chart Data for Bar Chart
     const fetchChartData = async () => {
@@ -75,6 +78,34 @@ export default {
               backgroundColor: '#42A5F5',
               data: data,
             },
+            //Add Label for Dash Line 
+            {
+              label: `Avg: ${AVERAGE_VALUE} kWh`,
+              type: 'line',
+              // data: Array(labels.length).fill(AVERAGE_VALUE),
+              borderColor: 'blue',
+              borderWidth: 2,
+              borderDash: [6, 6],
+              fill: false,
+            },
+            {
+              label: `Warn: ${WARNING_VALUE} kWh`,
+              type: 'line',
+              // data: Array(labels.length).fill(WARNING_VALUE),
+              borderColor: 'orange',
+              borderWidth: 2,
+              borderDash: [6, 6],
+              fill: false,
+            },
+            {
+              label: `Act: ${ACTION_VALUE} kWh`,
+              type: 'line',
+              // data: Array(labels.length).fill(ACTION_VALUE),
+              borderColor: 'red',
+              borderWidth: 2,
+              borderDash: [6, 6],
+              fill: false,
+            },
           ],
         },
         options: {
@@ -110,20 +141,64 @@ export default {
                   borderColor: 'blue',
                   borderWidth: 2,
                   borderDash: [6, 6],
-                  label: {
-                    display: 'auto',
-                    content: `🔴 Avg: ${AVERAGE_VALUE} kWh`,
-                    enabled: true,
-                    position: 'end',
-                    backgroundColor: 'rgba(27, 48, 181, 0.8)',
-                    color: '#DCEF32',
-                    font: {
-                      size: 10,
-                      weight: 'bold',
-                    },
-                    padding: 8,
-                    borderRadius: 5,
-                  },
+                  // label: {
+                  //   display: 'auto',
+                  //   content: `Avg: ${AVERAGE_VALUE} kWh`,
+                  //   enabled: true,
+                  //   position: 'end',
+                  //   backgroundColor: 'rgba(27, 48, 181, 0.8)',
+                  //   color: '#DCEF32',
+                  //   font: {
+                  //     size: 10,
+                  //     weight: 'bold',
+                  //   },
+                  //   padding: 8,
+                  //   borderRadius: 5,
+                  // },
+                },
+                line2: {
+                  type: 'line',
+                  yMin: WARNING_VALUE,
+                  yMax: WARNING_VALUE,
+                  borderColor: 'orange',
+                  borderWidth: 2,
+                  borderDash: [6, 6],
+                  // label: {
+                  //   display: 'auto',
+                  //   content: `Warn: ${WARNING_VALUE} kWh`,
+                  //   enabled: true,
+                  //   position: 'end',
+                  //   backgroundColor: 'rgba(255, 189, 88, 0.8)',
+                  //   color: '#DCEF32',
+                  //   font: {
+                  //     size: 10,
+                  //     weight: 'bold',
+                  //   },
+                  //   padding: 8,
+                  //   borderRadius: 5,
+                  // },
+                },
+                line3: {
+                  type: 'line',
+                  yMin: ACTION_VALUE,
+                  yMax: ACTION_VALUE,
+                  borderColor: 'red',
+                  borderWidth: 2,
+                  borderDash: [6, 6],
+                  // label: {
+                  //   display: 'auto',
+                  //   content: `Act: ${ACTION_VALUE} kWh`,
+                  //   enabled: true,
+                  //   position: 'end',
+                  //   backgroundColor: 'rgba(255, 87, 109, 0.8)',
+                  //   color: '#DCEF32',
+                  //   font: {
+                  //     size: 10,
+                  //     weight: 'bold',
+                  //   },
+                  //   padding: 8,
+                  //   borderRadius: 5,
+                  // },
                 },
               },
             },
