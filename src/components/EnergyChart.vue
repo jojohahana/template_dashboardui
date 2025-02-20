@@ -107,7 +107,7 @@ export default {
                   type: 'line',
                   yMin: AVERAGE_VALUE,
                   yMax: AVERAGE_VALUE,
-                  borderColor: 'red',
+                  borderColor: 'blue',
                   borderWidth: 2,
                   borderDash: [6, 6],
                   label: {
@@ -115,8 +115,8 @@ export default {
                     content: `🔴 Avg: ${AVERAGE_VALUE} kWh`,
                     enabled: true,
                     position: 'end',
-                    backgroundColor: 'rgba(255, 99, 132, 0.8)',
-                    color: '#fff',
+                    backgroundColor: 'rgba(27, 48, 181, 0.8)',
+                    color: '#DCEF32',
                     font: {
                       size: 10,
                       weight: 'bold',

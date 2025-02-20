@@ -10,13 +10,13 @@ const routes = [
     path: '/',
     name: 'Home',
     component: HomePage,
-    meta: { title: 'Home - Energy Monitoring' }, // ✅ Fix: Use lowercase "title"
+    meta: { title: 'Home - Energy Monitoring' }, //Actived Page
   },
   {
     path: '/widget',
     name: 'Widget',
     component: WidgetPage,
-    meta: { title: 'Widget - Energy Monitoring' }, // ✅ Add title for other pages
+    meta: { title: 'Widget - Energy Monitoring' }, 
   },
   {
     path: '/charts',
@@ -34,7 +34,7 @@ const routes = [
     path: '/area',
     name: 'Area',
     component: AreaPage,
-    meta: { title: 'Area - Energy Monitoring' },
+    meta: { title: 'Area - Energy Monitoring' }, //Actived Page
   },
 ]
 
